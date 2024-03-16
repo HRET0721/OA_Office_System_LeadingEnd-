@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!--  项目坐标  -->
+    <groupId>org.hret</groupId>
+    <!--  项目名称  -->
+    <artifactId>oa-system</artifactId>
+    <!--  项目版本  -->
+    <version>1.0</version>
+
+    <!--  项目打包方式  pom：项目聚合  -->
+    <packaging>pom</packaging>
+
+    <!--  项目模块  -->
+    <modules>
+        <module>oa-system-common</module>
+        <module>oa-system-admin</module>
+        <module>oa-system-security</module>
+        <module>oa-system-mapper</module>
+        <module>oa-system-service</module>
+    </modules>
+
+    <!--  项目描述 | 版本控制  -->
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!--  统一版本  -->
+        <!-- springboot版本 -->
+        <spring.boot.version>3.1.0</spring.boot.version>
+        <!-- spring_doc版本 api文档 -->
+        <spring-doc.version>2.2.0</spring-doc.version>
+        <!-- lombok版本 实体类生成get set方法等等 -->
+        <lombok.version>1.18.20</lombok.version>
+        <!-- fastjson版本 json解析 -->
+        <fastjson.version>1.2.83</fastjson.version>
+        <!-- huToolAll版本 工具类 -->
+        <hutool.all.version>5.6.2</hutool.all.version>
+        <!-- mysql版本 -->
+        <mysql.version>8.0.32</mysql.version>
+        <!-- mybatis-plus版本 -->
+        <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
+        <!-- druid版本 数据库连接池 -->
+        <druid.version>1.1.21</druid.version>
+        <!-- pageHelper版本 分页插件 -->
+        <pagehelper.version>1.4.6</pagehelper.version>
+        <!-- redis版本 -->
+        <redis.version>3.1.0</redis.version>
+        <!-- redis连接池版本 -->
+        <commons-pool2.version>2.11.1</commons-pool2.version>
+        <!-- spring-session-redis版本 -->
+        <spring-session-redis.version>3.1.0</spring-session-redis.version>
+        <!-- knife4j版本 api文档增强 -->
+        <knife4j.version>4.1.0</knife4j.version>
+    </properties>
+
+    <!--  全局依赖管理  -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- springboot依赖管理 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- lombok依赖管理 -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+            <!-- fastjson依赖管理 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <!-- huToolAll依赖管理 -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.all.version}</version>
+            </dependency>
+            <!-- mysql依赖管理 -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+            <!-- druid依赖管理 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <!-- pageHelper依赖管理 -->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper.version}</version>
+            </dependency>
+            <!-- redis依赖管理 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>${redis.version}</version>
+            </dependency>
+            <!-- redis连接池依赖管理 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-pool2</artifactId>
+                <version>${commons-pool2.version}</version>
+            </dependency>
+            <!-- spring-session-redis依赖管理 -->
+            <dependency>
+                <groupId>org.springframework.session</groupId>
+                <artifactId>spring-session-data-redis</artifactId>
+                <version>${spring-session-redis.version}</version>
+            </dependency>
+            <!-- 接口文档 -->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>
