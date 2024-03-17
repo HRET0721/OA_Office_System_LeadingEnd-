@@ -9,7 +9,14 @@
         <version>1.0</version>
     </parent>
 
-    <artifactId>oa-system-admin</artifactId>
+    <artifactId>oa-system-web</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.hret</groupId>
+            <artifactId>oa-system-service</artifactId>
+        </dependency>
+    </dependencies>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

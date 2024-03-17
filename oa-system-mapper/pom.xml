@@ -11,6 +11,13 @@
 
     <artifactId>oa-system-mapper</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.hret</groupId>
+            <artifactId>oa-system-bean</artifactId>
+        </dependency>
+    </dependencies>
+
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>

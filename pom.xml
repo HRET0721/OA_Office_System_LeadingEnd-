@@ -17,12 +17,11 @@
     <!--  项目模块  -->
     <modules>
         <module>oa-system-common</module>
-        <module>oa-system-admin</module>
+        <module>oa-system-web</module>
         <module>oa-system-security</module>
         <module>oa-system-mapper</module>
         <module>oa-system-service</module>
         <module>oa-system-bean</module>
-        <module>oa-system-mapper/oa-system-mapper-personnel</module>
     </modules>
 
     <!--  项目描述 | 版本控制  -->
@@ -63,6 +62,37 @@
     <!--  全局依赖管理  -->
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.hret</groupId>
+                <artifactId>oa-system-web</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hret</groupId>
+                <artifactId>oa-system-bean</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hret</groupId>
+                <artifactId>oa-system-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hret</groupId>
+                <artifactId>oa-system-mapper</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hret</groupId>
+                <artifactId>oa-system-security</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hret</groupId>
+                <artifactId>oa-system-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
             <!-- springboot依赖管理 -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -94,6 +124,12 @@
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql.version}</version>
+            </dependency>
+            <!-- mybatis-plus依赖管理 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
             </dependency>
             <!-- druid依赖管理 -->
             <dependency>
@@ -133,5 +169,46 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <!--统一环境-->
+    <profiles>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <profiles.active>prod</profiles.active>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <profiles.active>dev</profiles.active>
+            </properties>
+        </profile>
+    </profiles>
+
+
+    <!--maven插件-->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>none</mainClass>     <!-- 取消查找本项目下的Main方法：为了解决Unable to find main class的问题 -->
+                    <classifier>execute</classifier>    <!-- 为了解决依赖模块找不到此模块中的类或属性 -->
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
