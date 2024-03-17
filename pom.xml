@@ -22,6 +22,7 @@
         <module>oa-system-mapper</module>
         <module>oa-system-service</module>
         <module>oa-system-bean</module>
+        <module>oa-system-mapper/oa-system-mapper-personnel</module>
     </modules>
 
     <!--  项目描述 | 版本控制  -->
