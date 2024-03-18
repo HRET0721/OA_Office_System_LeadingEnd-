@@ -5,18 +5,9 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/oa-system-bean/pom.xml" />
-        <option value="$PROJECT_DIR$/oa-system-web/oa-system-web-personnel/pom.xml" />
       </list>
     </option>
-    <option name="ignoredFiles">
-      <set>
-        <option value="$PROJECT_DIR$/oa-system-bean/oa-system-bean-personnel/pom.xml" />
-        <option value="$PROJECT_DIR$/oa-system-mapper/oa-system-mapper-personnel/pom.xml" />
-        <option value="$PROJECT_DIR$/oa-system-service/oa-system-service-personnel/pom.xml" />
-        <option value="$PROJECT_DIR$/oa-system-web/oa-system-web-personnel/pom.xml" />
-      </set>
-    </option>
+    <option name="workspaceImportForciblyTurnedOn" value="true" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
