@@ -1,45 +1,66 @@
 package org.hret.service.personnel.impl.assess;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.hret.entity.personnel.assess.Assess;
 import org.hret.mapper.personnel.assess.AssessMapper;
 import org.hret.pojo.JsonResult;
 import org.hret.service.personnel.assess.AssessService;
 import org.springframework.stereotype.Service;
 
+/**
+ * @author HRET
+ */
 @Service
 public class AssessServiceImpl extends ServiceImpl<AssessMapper, Assess> implements AssessService {
     @Override
-    public JsonResult findAssessListAndPage(Assess assess, Integer pageNum, Integer pageSize) {
-        IPage<Assess> page = new Page(pageNum,pageSize);
-        QueryWrapper<Assess> queryWrapper = new QueryWrapper();
-        if (assess != null && assess.getAssessName() != null && !assess.getAssessName().equals("")) {
+    public PageInfo<Assess> findAssessListAndPage(Assess assess) {
+
+        PageHelper.startPage(assess.getPageNum(), assess.getPageSize());
+
+        QueryWrapper<Assess> queryWrapper = new QueryWrapper<>();
+        if ( assess.getAssessName() != null && !"".equals(assess.getAssessName()) ) {
             queryWrapper.like("assess_name", assess.getAssessName());
         }
-        if (assess != null && assess.getStatus() != null && !assess.getStatus().equals("")){
+        if ( assess.getStatus() != null && !"".equals(assess.getStatus())){
             queryWrapper.like("assess_status", assess.getStatus());
         }
-        if (assess != null && assess.getAssessType() != null && !assess.getAssessType().equals("")) {
+        if ( assess.getAssessType() != null && !"".equals(assess.getAssessType()) ) {
             queryWrapper.eq("assess_type", assess.getAssessType());
         }
-        if (assess != null && assess.getAssessTime() != null && !assess.getAssessTime().equals("")) {
+        if ( assess.getAssessTime() != null && !"".equals(assess.getAssessTime()) ) {
             queryWrapper.eq("assess_time", assess.getAssessTime());
         }
-        IPage<Assess> page1 = this.baseMapper.selectPage(page, queryWrapper);
-        return JsonResult.ok(String.valueOf(page1));
+
+        return new PageInfo<>(list(queryWrapper));
     }
 
     @Override
-    public void addAssessMent(Assess assess) {
-        this.baseMapper.insert(assess);
+    public JsonResult addAssessMent(Assess assess) {
+
+        int insert = this.baseMapper.insert(assess);
+
+        if (insert > 0) {
+            return JsonResult.ok("添加成功");
+        } else {
+            return JsonResult.error("添加失败");
+        }
+
     }
 
     @Override
-    public void deleteAssessMent(Long assessId) {
-        this.baseMapper.deleteById(assessId);
+    public JsonResult deleteAssessMent(Long assessId) {
+
+        int i = this.baseMapper.deleteById(assessId);
+
+        if (i > 0) {
+            return JsonResult.ok("删除成功");
+        } else {
+            return JsonResult.error("删除失败");
+        }
+
     }
 
     @Override
@@ -48,7 +69,15 @@ public class AssessServiceImpl extends ServiceImpl<AssessMapper, Assess> impleme
     }
 
     @Override
-    public void updateAssessMent(Assess assess) {
-        this.baseMapper.updateById(assess);
+    public JsonResult updateAssessMent(Assess assess) {
+
+        int i = this.baseMapper.updateById(assess);
+
+        if (i > 0) {
+            return JsonResult.ok("修改成功");
+        } else {
+            return JsonResult.error("修改失败");
+        }
+
     }
 }

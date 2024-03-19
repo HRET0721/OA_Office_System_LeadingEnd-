@@ -10,6 +10,7 @@ import java.util.List;
  * Authar:liujintao
  * Data:2024/3/18
  * jdk:17
+ * @author HRET
  */
 public interface RecruitJobService extends IService<RecruitJob> {
     PageInfo<RecruitJob> findPage(RecruitJob recruitJob, int pageNum, int pageSize);

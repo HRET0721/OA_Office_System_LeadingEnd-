@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Author:HRET Milky Way
  * Date:2024/3/18
  * version:1.0
- *
  * @author HRET
  * OA系统启动类
  */

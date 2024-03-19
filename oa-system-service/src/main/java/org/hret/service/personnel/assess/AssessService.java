@@ -1,19 +1,23 @@
 package org.hret.service.personnel.assess;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.github.pagehelper.PageInfo;
 import org.hret.entity.personnel.assess.Assess;
 import org.hret.pojo.JsonResult;
 
+/**
+ * @author HRET
+ */
 public interface AssessService  extends IService<Assess> {
-    JsonResult findAssessListAndPage(Assess assess, Integer pageNum, Integer pageSize);
 
+    PageInfo<Assess> findAssessListAndPage(Assess assess);
 
-    void addAssessMent(Assess assess);
+    JsonResult addAssessMent(Assess assess);
 
-    void deleteAssessMent(Long assessId);
+    JsonResult deleteAssessMent(Long assessId);
 
     Assess findAeeseeMentById(Long assessId);
 
-    void updateAssessMent(Assess assess);
+    JsonResult updateAssessMent(Assess assess);
 
 }

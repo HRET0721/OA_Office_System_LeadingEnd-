@@ -5,9 +5,10 @@ import org.apache.ibatis.annotations.Mapper;
 import org.hret.entity.personnel.recruit.po.RecruitJob;
 
 /**
- * Authar:liujintao
+ * Author:liujintao
  * Data:2024/3/18
  * jdk:17
+ * @author HRET
  */
 @Mapper
 public interface RecruitJobMapper extends BaseMapper<RecruitJob>{

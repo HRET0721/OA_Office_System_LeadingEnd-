@@ -4,9 +4,12 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hret.entity.Page;
 import org.springframework.stereotype.Component;
 
+import java.io.Serial;
 import java.util.Date;
 import java.io.Serializable;
 
@@ -16,11 +19,14 @@ import java.io.Serializable;
  * @author makejava
  * @since 2024-03-18 20:47:23
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Component
-public class Assess implements Serializable {
+public class Assess extends Page implements Serializable{
+
+    @Serial
     private static final long serialVersionUID = -49452775890884099L;
 /**
      * 考核id
@@ -34,7 +40,7 @@ public class Assess implements Serializable {
 /**
      * 考核周期
      */
-    private Date assessTime;
+    private String assessTime;
 /**
      * 考核范围(0:技术部;1:产品部;2:销售部;3:市场部;4:人事部;)
      */
