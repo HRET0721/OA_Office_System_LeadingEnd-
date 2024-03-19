@@ -33,7 +33,7 @@ public class RecruitJob implements Serializable {
      * id
      */
     @TableId(type = IdType.AUTO)
-    @Excel(name = "职位id",width = 20,isImportField = "true"0)
+    @Excel(name = "职位id",width = 20,isImportField = "true")
     private Integer jobId;
     /**
      * 职位名称
