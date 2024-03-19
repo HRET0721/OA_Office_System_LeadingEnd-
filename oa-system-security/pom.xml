@@ -9,19 +9,9 @@
         <version>1.0</version>
     </parent>
 
-    <artifactId>oa-system-bean</artifactId>
+    <artifactId>oa-system-security</artifactId>
 
     <dependencies>
-        <dependency>
-            <groupId>org.hret</groupId>
-            <artifactId>oa-system-common</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>io.swagger</groupId>
-            <artifactId>swagger-annotations</artifactId>
-            <version>1.5.22</version>
-        </dependency>
     </dependencies>
 
     <properties>
