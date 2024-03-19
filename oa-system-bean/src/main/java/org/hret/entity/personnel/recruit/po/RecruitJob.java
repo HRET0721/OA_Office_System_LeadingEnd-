@@ -6,10 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
+import org.hret.entity.Page;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -20,13 +18,14 @@ import java.io.Serializable;
  * @author makejava
  * @since 2024-03-13 09:19:12
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @TableName("recruit_job")
 @ApiModel("职位实体类")
-public class RecruitJob implements Serializable {
+public class RecruitJob extends Page implements Serializable {
     @Serial
     private static final long serialVersionUID = -17107097014328568L;
     /**

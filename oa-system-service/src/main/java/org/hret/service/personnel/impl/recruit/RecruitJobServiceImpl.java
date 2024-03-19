@@ -7,6 +7,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.hret.entity.personnel.recruit.po.RecruitJob;
 import org.hret.mapper.personnel.recruit.RecruitJobMapper;
+import org.hret.pojo.JsonResult;
 import org.hret.service.personnel.recruit.RecruitJobService;
 import org.springframework.stereotype.Service;
 
@@ -22,9 +23,9 @@ import java.util.*;
 public class RecruitJobServiceImpl extends ServiceImpl<RecruitJobMapper, RecruitJob> implements RecruitJobService {
 
     @Override
-    public PageInfo<RecruitJob> findPage(RecruitJob recruitJob, int pageNum, int pageSize) {
+    public PageInfo<RecruitJob> findPage(RecruitJob recruitJob) {
         // 开启分页插件
-        PageHelper.startPage(pageNum, pageSize);
+        PageHelper.startPage(recruitJob.getPageNum(),recruitJob.getPageSize());
 
         LambdaQueryWrapper<RecruitJob> wrapper = Wrappers.lambdaQuery(RecruitJob.class);
 
@@ -56,27 +57,47 @@ public class RecruitJobServiceImpl extends ServiceImpl<RecruitJobMapper, Recruit
     }
 
     @Override
-    public void updateState(RecruitJob recruitJob) {
-        this.baseMapper.update(null,Wrappers.lambdaUpdate(RecruitJob.class).eq(RecruitJob::getJobId,recruitJob.getJobId()).set(RecruitJob::getJobStatus,recruitJob.getJobStatus()));
+    public JsonResult updateState(RecruitJob recruitJob) {
+        int update = this.baseMapper.update(null, Wrappers.lambdaUpdate(RecruitJob.class).eq(RecruitJob::getJobId, recruitJob.getJobId()).set(RecruitJob::getJobStatus, recruitJob.getJobStatus()));
+        if (update > 0){
+            return JsonResult.ok("更新成功");
+        }else {
+            return JsonResult.error("更新失败");
+        }
     }
 
     @Override
-    public void updateJob(RecruitJob recruitJob) {
-        this.updateById(recruitJob);
+    public JsonResult updateJob(RecruitJob recruitJob) {
+        boolean b = this.updateById(recruitJob);
+        if (b){
+            return JsonResult.ok("更新成功");
+        }else {
+            return JsonResult.error("更新失败");
+        }
     }
 
     @Override
-    public void addJob(RecruitJob recruitJob) {
+    public JsonResult addJob(RecruitJob recruitJob) {
         recruitJob.setJobStatus("1");
         Date date = new Date();
         String format = new SimpleDateFormat("yyyy-MM-dd").format(date);
         recruitJob.setJobTime(format);
-        this.baseMapper.insert(recruitJob);
+        int insert = this.baseMapper.insert(recruitJob);
+        if (insert > 0){
+            return JsonResult.ok("添加成功");
+        }else {
+            return JsonResult.error("添加失败");
+        }
     }
 
     @Override
-    public void deleteJob(RecruitJob recruitJob) {
-        this.removeById(recruitJob);
+    public JsonResult deleteJob(RecruitJob recruitJob) {
+        boolean b = this.removeById(recruitJob);
+        if (b){
+            return JsonResult.ok("删除成功");
+        }else {
+            return JsonResult.error("删除失败");
+        }
     }
 
     @Override

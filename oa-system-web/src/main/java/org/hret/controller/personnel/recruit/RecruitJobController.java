@@ -27,32 +27,56 @@ public class RecruitJobController {
 
     @RequestMapping(value = "findPage", method = RequestMethod.POST)
     @Operation(summary = "查询职位", description = "查询职位")
-    public JsonResult findPage(@RequestBody RecruitJob recruitJob, @RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum, @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize) {
-        return JsonResult.ok("200",recruitJobService.findPage(recruitJob, pageNum, pageSize));
+    public JsonResult findPage(@RequestBody RecruitJob recruitJob) {
+        return JsonResult.ok("200", recruitJobService.findPage(recruitJob));
     }
 
     @RequestMapping(value = "updateState", method = RequestMethod.POST)
     @Operation(summary = "更新职位状态", description = "更新职位状态")
-    public void updateState(@RequestBody RecruitJob recruitJob) {
-        recruitJobService.updateState(recruitJob);
+    public JsonResult updateState(@RequestBody RecruitJob recruitJob) {
+        try {
+            recruitJobService.updateState(recruitJob);
+            return JsonResult.ok("200", "状态修改成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return JsonResult.error("更新状态失败");
+        }
     }
 
     @Operation(summary = "更新职位", description = "更新职位")
     @RequestMapping(value = "updateJob", method = RequestMethod.POST)
-    public void updateJob(@RequestBody RecruitJob recruitJob) {
-        recruitJobService.updateJob(recruitJob);
+    public JsonResult updateJob(@RequestBody RecruitJob recruitJob) {
+        try {
+            recruitJobService.updateJob(recruitJob);
+            return JsonResult.ok("200", "更新职位失败");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return JsonResult.error("更新失败");
+        }
     }
 
     @Operation(summary = "添加职位", description = "添加职位")
     @RequestMapping(value = "addJob", method = RequestMethod.POST)
-    public void addJob(@RequestBody RecruitJob recruitJob) {
-        recruitJobService.addJob(recruitJob);
+    public JsonResult addJob(@RequestBody RecruitJob recruitJob) {
+        try {
+            recruitJobService.addJob(recruitJob);
+            return JsonResult.ok("200", "添加成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return JsonResult.error("添加失败");
+        }
     }
 
     @Operation(summary = "删除职位", description = "删除职位")
     @RequestMapping(value = "deleteJob", method = RequestMethod.POST)
-    public void deleteJob(@RequestBody RecruitJob recruitJob) {
-        recruitJobService.deleteJob(recruitJob);
+    public JsonResult deleteJob(@RequestBody RecruitJob recruitJob) {
+        try {
+            recruitJobService.deleteJob(recruitJob);
+            return JsonResult.ok("200", "删除成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return JsonResult.error("删除失败");
+        }
     }
 
     @Operation(summary = "查询所有职位", description = "查询所有职位")
@@ -62,9 +86,9 @@ public class RecruitJobController {
     }
 
 
-    @GetMapping(value = "exportData")
+    @RequestMapping(value = "exportData")
     @Operation(summary = "导出数据", description = "导出数据")
-    void exportData(HttpServletResponse response){
+    void exportData(HttpServletResponse response) {
         List<RecruitJob> all = recruitJobService.findAll();
         EasyPoiUtils.exportExcel(all, "日志导出", "日志导出", RecruitJob.class, "日志导出.xlsx", response);
     }
