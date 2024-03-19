@@ -44,7 +44,7 @@ public class AssessController {
             return JsonResult.error("删除失败");
         }
     }
-    @RequestMapping(value = "findAeeseeMentById",method = RequestMethod.GET)
+    @RequestMapping(value = "findAssessMentById",method = RequestMethod.GET)
     @Operation(summary = "根据考核方法id查询考核方法",description = "根据考核方法id查询考核方法")
     public Assess findAssessMentById(@RequestParam(value = "assessId") Long assessId) {
         return assessService.findAeeseeMentById(assessId);
