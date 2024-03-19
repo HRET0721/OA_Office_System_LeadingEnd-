@@ -1,0 +1,5 @@
+# 项目排除路径
+/oa-system-bean/target/
+/oa-system-mapper/target/
+/oa-system-service/target/
+/oa-system-web/target/
