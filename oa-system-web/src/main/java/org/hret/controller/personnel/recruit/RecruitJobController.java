@@ -1,11 +1,11 @@
 package org.hret.controller.personnel.recruit;
 
-import annotation.recruit.EasyPoiUtils;
+import org.hret.pojo.EasyPoiUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
-import org.hret.entity.recruit.po.RecruitJob;
-import org.hret.entity.recruit.vo.JsonResult;
+import org.hret.entity.personnel.recruit.po.RecruitJob;
+import org.hret.pojo.JsonResult;
 import org.hret.service.personnel.recruit.RecruitJobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

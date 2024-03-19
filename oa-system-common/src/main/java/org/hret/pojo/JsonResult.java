@@ -1,4 +1,4 @@
-package org.hret.entity.recruit.vo;
+package org.hret.pojo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

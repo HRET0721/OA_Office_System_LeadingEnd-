@@ -1,4 +1,4 @@
-package org.hret.entity.recruit.dto;
+package org.hret.entity.personnel.recruit.dto;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package annotation.recruit;
+package org.hret.pojo;
 
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;

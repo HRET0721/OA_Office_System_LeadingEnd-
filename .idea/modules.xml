@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/oa-system.iml" filepath="$PROJECT_DIR$/oa-system.iml" />
+      <module fileurl="file://$PROJECT_DIR$/oa-system-mapper/oa-system-mapper.iml" filepath="$PROJECT_DIR$/oa-system-mapper/oa-system-mapper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/oa-system-service/oa-system-service.iml" filepath="$PROJECT_DIR$/oa-system-service/oa-system-service.iml" />
+    </modules>
+  </component>
+</project>

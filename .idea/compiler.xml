@@ -15,5 +15,9 @@
         <module name="oa-system-mapper" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="oa-system-admin" target="17" />
+      <module name="oa-system-mapper-personnel" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>

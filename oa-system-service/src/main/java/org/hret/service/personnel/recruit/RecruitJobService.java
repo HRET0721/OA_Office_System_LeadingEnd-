@@ -2,7 +2,7 @@ package org.hret.service.personnel.recruit;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.github.pagehelper.PageInfo;
-import org.hret.entity.recruit.po.RecruitJob;
+import org.hret.entity.personnel.recruit.po.RecruitJob;
 
 import java.util.List;
 

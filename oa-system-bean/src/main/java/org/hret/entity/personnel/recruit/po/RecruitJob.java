@@ -1,4 +1,4 @@
-package org.hret.entity.recruit.po;
+package org.hret.entity.personnel.recruit.po;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.baomidou.mybatisplus.annotation.IdType;
