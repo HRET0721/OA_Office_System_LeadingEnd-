@@ -1,6 +1,7 @@
 package org.hret.entity.personnel.assess;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -54,9 +55,50 @@ public class AssessTemplate extends Page implements Serializable {
      * 总分
      */
     private String score;
+    /**
+     * 员工自评
+     */
+    private Integer employeeSelfAssessment;
+    /**
+     * 允许添加指标
+     */
+    private Integer addMetrics;
+    /**
+     * 评价权限
+     */
+    private Object commentPermissions;
+    /**
+     * 邀请同事评价
+     */
+    private Integer inviteColleagues;
+    /**
+     * 最少人数
+     */
+    private Integer minNumber;
+    /**
+     * 最多人数
+     */
+    private Integer maxNumber;
+    /**
+     * 截止时间
+     */
+    private Date deadline;
+    /**
+     * 上级评价
+     */
+    private Integer superiorEvaluation;
+    /**
+     * 可执行人
+     */
+    private Object executor;
+    /**
+     * 指派给指定人(0:手动调整;1自动跳过:;2:指派给指定人;)
+     */
+    private String nodeEmpty;
 
-
-
+//封装考核指标
+    @TableField(exist = false)
+    private AssessIndex assessIndex;
 
 }
 
