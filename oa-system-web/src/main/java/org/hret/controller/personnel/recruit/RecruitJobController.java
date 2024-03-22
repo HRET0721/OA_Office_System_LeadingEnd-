@@ -4,7 +4,7 @@ import org.hret.pojo.EasyPoiUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
-import org.hret.entity.personnel.recruit.po.RecruitJob;
+import org.hret.entity.personnel.recruit.RecruitJob;
 import org.hret.pojo.JsonResult;
 import org.hret.service.personnel.recruit.RecruitJobService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,17 +13,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * Author:intaglio
+ * Authar:liujintao
  * Data:2024/3/18
  * jdk:17
- * @author HRET
  */
 @CrossOrigin
 @RestController
 @RequestMapping(value = "recruitJob")
 @Tag(name = "职位管理", description = "职位管理")
 public class RecruitJobController {
-
     @Autowired
     private RecruitJobService recruitJobService;
 
@@ -39,7 +37,7 @@ public class RecruitJobController {
         try {
             return recruitJobService.updateState(recruitJob);
         } catch (Exception e) {
-            e.fillInStackTrace();
+            e.printStackTrace();
             return JsonResult.error("更新状态失败");
         }
     }
@@ -50,7 +48,7 @@ public class RecruitJobController {
         try {
             return recruitJobService.updateJob(recruitJob);
         } catch (Exception e) {
-            e.fillInStackTrace();
+            e.printStackTrace();
             return JsonResult.error("更新失败");
         }
     }
@@ -61,7 +59,7 @@ public class RecruitJobController {
         try {
             return recruitJobService.addJob(recruitJob);
         } catch (Exception e) {
-            e.fillInStackTrace();
+            e.printStackTrace();
             return JsonResult.error("添加失败");
         }
     }
@@ -72,7 +70,7 @@ public class RecruitJobController {
         try {
             return recruitJobService.deleteJob(recruitJob);
         } catch (Exception e) {
-            e.fillInStackTrace();
+            e.printStackTrace();
             return JsonResult.error("删除失败");
         }
     }
