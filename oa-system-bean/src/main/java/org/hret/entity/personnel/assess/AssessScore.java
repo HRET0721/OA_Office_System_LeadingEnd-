@@ -6,14 +6,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.hret.entity.Page;
+import org.hret.entity.utils.query.Page;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 
 /**
  * 考核评分(AssessScore)实体类
- *
  * @author makejava
  * @since 2024-03-21 14:02:25
  */
