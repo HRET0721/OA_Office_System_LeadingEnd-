@@ -16,4 +16,6 @@ public interface AssessTemplateService extends IService<AssessTemplate> {
     JsonResult deleteAssessTemplate(Long templateId);
 
     JsonResult updateAssessTemplate(AssessTemplate assessTemplate);
+
+    JsonResult addAssessTemplateAndAssessIndex(AssessTemplate assessTemplate);
 }

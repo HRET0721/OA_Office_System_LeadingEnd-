@@ -36,6 +36,18 @@ public class AssessTemplateController {
             return JsonResult.error("添加失败");
         }
     }
+//    多表新增
+    @RequestMapping(value = "addAssessTemplateAndAssessIndexAndProcess",method = RequestMethod.POST)
+    @Operation(summary = "添加考核模板、考核指标和考核流程",description = "添加考核模板、考核指标和考核流程")
+    public JsonResult addAssessTemplateAndAssessIndex(@RequestBody AssessTemplate assessTemplate)
+    {
+        try {
+            return assessTemplateService.addAssessTemplateAndAssessIndex(assessTemplate);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return JsonResult.error("添加失败");
+        }
+    }
     @RequestMapping(value = "findAssessTemplateById",method = RequestMethod.POST)
     @Operation(summary = "根据考核模板id查询考核模板",description = "根据考核模板id查询考核模板")
     public AssessTemplate findAssessTemplateById(@RequestParam(value = "templateId") Long templateId)
