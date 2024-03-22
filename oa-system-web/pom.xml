@@ -16,6 +16,11 @@
             <groupId>org.hret</groupId>
             <artifactId>oa-system-service</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <properties>

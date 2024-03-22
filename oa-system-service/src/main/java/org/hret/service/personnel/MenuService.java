@@ -1,7 +1,7 @@
 package org.hret.service.personnel;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import org.hret.entity.Menu;
+import org.hret.entity.utils.Menu;
 
 import java.util.List;
 

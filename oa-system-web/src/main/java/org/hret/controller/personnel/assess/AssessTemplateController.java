@@ -9,6 +9,9 @@ import org.hret.pojo.JsonResult;
 import org.hret.service.personnel.assess.AssessTemplateService;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * @author HRET
+ */
 @RestController
 @CrossOrigin
 @RequiredArgsConstructor
@@ -29,7 +32,7 @@ public class AssessTemplateController {
         try {
             return assessTemplateService.addAssessTemplate(assessTemplate);
         } catch (Exception e) {
-            e.printStackTrace();
+            e.fillInStackTrace();
             return JsonResult.error("添加失败");
         }
     }
@@ -46,7 +49,7 @@ public class AssessTemplateController {
         try {
             return assessTemplateService.deleteAssessTemplate(templateId);
         } catch (Exception e) {
-            e.printStackTrace();
+            e.fillInStackTrace();
             return JsonResult.error("删除失败");
         }
     }
@@ -57,7 +60,7 @@ public class AssessTemplateController {
         try {
             return assessTemplateService.updateAssessTemplate(assessTemplate);
         } catch (Exception e) {
-            e.printStackTrace();
+            e.fillInStackTrace();
             return JsonResult.error("修改失败");
         }
     }

@@ -3,7 +3,7 @@ package org.hret.controller.personnel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.hret.entity.Menu;
+import org.hret.entity.utils.Menu;
 import org.springframework.web.bind.annotation.*;
 import org.hret.service.personnel.impl.MenuServiceImpl;
 

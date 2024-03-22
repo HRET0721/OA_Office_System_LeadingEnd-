@@ -53,7 +53,7 @@ public class HolidayServiceImpl extends ServiceImpl<HolidayMapper, Holiday> impl
 
     @Override
     public Holiday findHoliday(Long holidayId) {
-        return this.baseMapper.selectById(holidayId);
+        return getById(holidayId);
     }
 
     @Override

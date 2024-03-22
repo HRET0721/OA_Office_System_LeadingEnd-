@@ -5,14 +5,14 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import lombok.RequiredArgsConstructor;
-import org.hret.entity.personnel.assess.Assess;
 import org.hret.entity.personnel.leave.Holiday;
 import org.hret.pojo.JsonResult;
 import org.hret.service.personnel.impl.leave.HolidayServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
+/**
+ * @author HRET
+ */
 @RestController
 @CrossOrigin
 @RequiredArgsConstructor
@@ -32,7 +32,7 @@ public class HolidayController {
         try {
             return holidayServiceImpl.deleteHoliday(holidayId);
         } catch (Exception e) {
-            e.printStackTrace();
+            e.fillInStackTrace();
             return JsonResult.error("删除失败");
         }
     }
@@ -42,7 +42,7 @@ public class HolidayController {
         try {
             return holidayServiceImpl.addHoliday(holiday);
         } catch (Exception e) {
-            e.printStackTrace();
+            e.fillInStackTrace();
             return JsonResult.error("添加失败");
         }
     }
@@ -57,7 +57,7 @@ public class HolidayController {
         try {
             return holidayServiceImpl.updateHoliday(holiday);
         } catch (Exception e) {
-            e.printStackTrace();
+            e.fillInStackTrace();
             return JsonResult.error("修改失败");
         }
     }

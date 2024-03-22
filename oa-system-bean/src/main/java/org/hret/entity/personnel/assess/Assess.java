@@ -6,11 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.hret.entity.Page;
+import org.hret.entity.utils.query.Page;
 import org.springframework.stereotype.Component;
 
 import java.io.Serial;
-import java.util.Date;
 import java.io.Serializable;
 
 /**

@@ -1,4 +1,4 @@
-package org.hret.entity;
+package org.hret.entity.utils.query;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.AllArgsConstructor;

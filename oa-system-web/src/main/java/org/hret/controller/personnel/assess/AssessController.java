@@ -30,7 +30,7 @@ public class AssessController {
         try {
             return assessService.addAssessMent(assess);
         } catch (Exception e) {
-            e.printStackTrace();
+            e.fillInStackTrace();
             return JsonResult.error("添加失败");
         }
     }
@@ -40,7 +40,7 @@ public class AssessController {
         try {
             return assessService.deleteAssessMent(assessId);
         } catch (Exception e) {
-            e.printStackTrace();
+            e.fillInStackTrace();
             return JsonResult.error("删除失败");
         }
     }
@@ -55,7 +55,7 @@ public class AssessController {
         try {
             return assessService.updateAssessMent(assess);
         } catch (Exception e) {
-            e.printStackTrace();
+            e.fillInStackTrace();
             return JsonResult.error("修改失败");
         }
     }

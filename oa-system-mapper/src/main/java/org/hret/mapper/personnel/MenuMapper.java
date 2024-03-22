@@ -1,8 +1,7 @@
 package org.hret.mapper.personnel;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Mapper;
-import org.hret.entity.Menu;
+import org.hret.entity.utils.Menu;
 
 /**
  * Author:HRET Milky Way

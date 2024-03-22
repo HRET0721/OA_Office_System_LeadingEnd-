@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * @author HRET
+ */
 @RestController
 @CrossOrigin
 @RequiredArgsConstructor
@@ -33,7 +36,7 @@ public class RecordingController {
         try {
             return recordingservicelmpl.deleteRecording(approvalId);
         } catch (Exception e) {
-            e.printStackTrace();
+            e.fillInStackTrace();
             return JsonResult.error("删除失败");
         }
     }

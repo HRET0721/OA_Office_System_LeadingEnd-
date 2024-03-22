@@ -53,7 +53,7 @@ public class EasyPoiUtils {
 
             workbook.write(response.getOutputStream());
         } catch (Exception e) {
-            e.printStackTrace();
+            e.fillInStackTrace();
         }
     }
 

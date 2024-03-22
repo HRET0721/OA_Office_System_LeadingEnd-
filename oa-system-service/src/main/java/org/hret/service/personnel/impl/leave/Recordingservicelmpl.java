@@ -49,6 +49,6 @@ public class Recordingservicelmpl extends ServiceImpl<RecordingMapper, Recording
 
     @Override
     public List<Recording> excel() {
-        return this.baseMapper.selectList(null);
+        return list();
     }
 }

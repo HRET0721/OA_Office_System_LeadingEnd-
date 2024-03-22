@@ -102,6 +102,6 @@ public class RecruitJobServiceImpl extends ServiceImpl<RecruitJobMapper, Recruit
 
     @Override
     public List<RecruitJob> findAll() {
-        return this.baseMapper.selectList(null);
+        return list();
     }
 }

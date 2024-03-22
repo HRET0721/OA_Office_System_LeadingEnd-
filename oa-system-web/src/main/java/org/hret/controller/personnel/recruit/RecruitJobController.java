@@ -13,15 +13,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * Authar:liujintao
+ * Author:intaglio
  * Data:2024/3/18
  * jdk:17
+ * @author HRET
  */
 @CrossOrigin
 @RestController
 @RequestMapping(value = "recruitJob")
 @Tag(name = "职位管理", description = "职位管理")
 public class RecruitJobController {
+
     @Autowired
     private RecruitJobService recruitJobService;
 
@@ -35,10 +37,9 @@ public class RecruitJobController {
     @Operation(summary = "更新职位状态", description = "更新职位状态")
     public JsonResult updateState(@RequestBody RecruitJob recruitJob) {
         try {
-            recruitJobService.updateState(recruitJob);
-            return JsonResult.ok("200", "状态修改成功");
+            return recruitJobService.updateState(recruitJob);
         } catch (Exception e) {
-            e.printStackTrace();
+            e.fillInStackTrace();
             return JsonResult.error("更新状态失败");
         }
     }
@@ -47,10 +48,9 @@ public class RecruitJobController {
     @RequestMapping(value = "updateJob", method = RequestMethod.POST)
     public JsonResult updateJob(@RequestBody RecruitJob recruitJob) {
         try {
-            recruitJobService.updateJob(recruitJob);
-            return JsonResult.ok("200", "更新职位失败");
+            return recruitJobService.updateJob(recruitJob);
         } catch (Exception e) {
-            e.printStackTrace();
+            e.fillInStackTrace();
             return JsonResult.error("更新失败");
         }
     }
@@ -59,10 +59,9 @@ public class RecruitJobController {
     @RequestMapping(value = "addJob", method = RequestMethod.POST)
     public JsonResult addJob(@RequestBody RecruitJob recruitJob) {
         try {
-            recruitJobService.addJob(recruitJob);
-            return JsonResult.ok("200", "添加成功");
+            return recruitJobService.addJob(recruitJob);
         } catch (Exception e) {
-            e.printStackTrace();
+            e.fillInStackTrace();
             return JsonResult.error("添加失败");
         }
     }
@@ -71,10 +70,9 @@ public class RecruitJobController {
     @RequestMapping(value = "deleteJob", method = RequestMethod.POST)
     public JsonResult deleteJob(@RequestBody RecruitJob recruitJob) {
         try {
-            recruitJobService.deleteJob(recruitJob);
-            return JsonResult.ok("200", "删除成功");
+            return recruitJobService.deleteJob(recruitJob);
         } catch (Exception e) {
-            e.printStackTrace();
+            e.fillInStackTrace();
             return JsonResult.error("删除失败");
         }
     }

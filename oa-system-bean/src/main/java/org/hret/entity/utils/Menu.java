@@ -1,4 +1,4 @@
-package org.hret.entity;
+package org.hret.entity.utils;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;

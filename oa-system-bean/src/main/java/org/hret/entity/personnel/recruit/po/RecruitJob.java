@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import lombok.*;
-import org.hret.entity.Page;
+import org.hret.entity.utils.query.Page;
 
 import java.io.Serial;
 import java.io.Serializable;

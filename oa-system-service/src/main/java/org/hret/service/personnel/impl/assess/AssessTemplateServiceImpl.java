@@ -36,7 +36,7 @@ public class AssessTemplateServiceImpl extends ServiceImpl<AssessTemplateMapper,
 
     @Override
     public AssessTemplate findAssessTemplateById(Long templateId) {
-        return this.baseMapper.selectById(templateId);
+        return getById(templateId);
     }
 
     @Override
