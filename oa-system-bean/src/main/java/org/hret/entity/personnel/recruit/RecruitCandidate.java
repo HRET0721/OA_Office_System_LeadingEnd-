@@ -133,7 +133,7 @@ public class RecruitCandidate extends Page implements Serializable {
 
     @Excel(name = "申请时间", width = 20, isImportField = "true")
     //申请时间
-    private Date candidateTime;
+    private String candidateTime;
 
     @Excel(name = "入库时间", width = 20, isImportField = "true")
     //入库时间

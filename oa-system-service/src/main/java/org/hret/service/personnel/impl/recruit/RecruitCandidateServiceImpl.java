@@ -7,9 +7,12 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.hret.entity.personnel.recruit.RecruitCandidate;
 import org.hret.mapper.personnel.recruit.RecruitCandidateMapper;
+import org.hret.pojo.JsonResult;
 import org.hret.service.personnel.recruit.RecruitCandidateService;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -51,5 +54,54 @@ public class RecruitCandidateServiceImpl extends ServiceImpl<RecruitCandidateMap
 
         List<RecruitCandidate> list = this.list(wrapper);
         return new PageInfo<>(list);
+    }
+
+    @Override
+    public JsonResult updateRecruitCandidateStatus(RecruitCandidate recruitCandidate) {
+        int update = this.baseMapper.update(recruitCandidate, Wrappers.lambdaUpdate(RecruitCandidate.class).eq(RecruitCandidate::getCandidateId, recruitCandidate.getCandidateId()).set(RecruitCandidate::getCandidateStatus, recruitCandidate.getCandidateStatus()));
+        if (update > 0){
+            return JsonResult.ok("更新成功");
+        }else {
+            return JsonResult.error("更新失败");
+        }
+    }
+
+    @Override
+    public JsonResult updateRecruitCandidate(RecruitCandidate recruitCandidate) {
+        boolean update = this.updateById(recruitCandidate);
+        if (update){
+            return JsonResult.ok("更新成功");
+        }else {
+            return JsonResult.error("更新失败");
+        }
+    }
+
+    @Override
+    public JsonResult addRecruitCandidate(RecruitCandidate recruitCandidate) {
+        recruitCandidate.setCandidateStatus("1");
+        Date date = new Date();
+        String format = new SimpleDateFormat("yyyy-MM-dd").format(date);
+        recruitCandidate.setCandidateTime(format);
+        int insert = this.baseMapper.insert(recruitCandidate);
+        if (insert>0){
+            return JsonResult.ok("添加成功");
+        }else {
+            return JsonResult.error("添加失败");
+        }
+    }
+
+    @Override
+    public JsonResult deleteRecruitCandidate(RecruitCandidate recruitCandidate) {
+        int delete = this.baseMapper.delete(Wrappers.lambdaQuery(RecruitCandidate.class).eq(RecruitCandidate::getCandidateId, recruitCandidate.getCandidateId()));
+        if (delete>0){
+            return JsonResult.ok("删除成功");
+        }else {
+            return JsonResult.error("删除失败");
+        }
+    }
+
+    @Override
+    public List<RecruitCandidate> findAll() {
+        return this.list();
     }
 }

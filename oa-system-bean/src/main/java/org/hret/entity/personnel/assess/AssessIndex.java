@@ -6,9 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.hret.entity.Page;
 import org.springframework.stereotype.Component;
+import org.hret.entity.utils.query.Page;
 
+import java.io.Serial;
 import java.util.Date;
 import java.io.Serializable;
 
@@ -24,6 +25,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Component
 public class AssessIndex extends Page implements Serializable {
+    @Serial
     private static final long serialVersionUID = -95847280987889377L;
 /**
      * 指标id
