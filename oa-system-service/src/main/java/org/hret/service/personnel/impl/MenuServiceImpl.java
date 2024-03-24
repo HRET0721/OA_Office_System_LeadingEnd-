@@ -3,9 +3,9 @@ package org.hret.service.personnel.impl;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.hret.entity.utils.Menu;
-import org.hret.mapper.personnel.MenuMapper;
+import org.hret.mapper.util.MenuMapper;
 import org.springframework.stereotype.Service;
-import org.hret.service.personnel.MenuService;
+import org.hret.service.util.MenuService;
 
 import java.util.List;
 

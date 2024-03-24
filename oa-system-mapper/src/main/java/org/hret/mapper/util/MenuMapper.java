@@ -1,4 +1,4 @@
-package org.hret.mapper.personnel;
+package org.hret.mapper.util;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.hret.entity.utils.Menu;
