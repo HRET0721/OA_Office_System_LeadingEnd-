@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.hret.entity.personnel.recruit.po.RecruitJob;
+import org.hret.entity.personnel.recruit.RecruitJob;
 import org.hret.mapper.personnel.recruit.RecruitJobMapper;
 import org.hret.pojo.JsonResult;
 import org.hret.service.personnel.recruit.RecruitJobService;
