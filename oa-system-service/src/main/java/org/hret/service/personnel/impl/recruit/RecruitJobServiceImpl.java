@@ -26,9 +26,10 @@ public class RecruitJobServiceImpl extends ServiceImpl<RecruitJobMapper, Recruit
     public PageInfo<RecruitJob> findPage(RecruitJob recruitJob) {
         // 开启分页插件
         PageHelper.startPage(recruitJob.getPageNum(),recruitJob.getPageSize());
-
+//        lambda查询
         LambdaQueryWrapper<RecruitJob> wrapper = Wrappers.lambdaQuery(RecruitJob.class);
 
+//        条查
         if (recruitJob.getJobPrincipal() != null && !recruitJob.getJobPrincipal().isEmpty()) {
             wrapper.eq(RecruitJob::getJobPrincipal, recruitJob.getJobPrincipal());
         }

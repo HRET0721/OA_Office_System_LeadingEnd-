@@ -48,10 +48,10 @@ public class RecruitCandidateServiceImpl extends ServiceImpl<RecruitCandidateMap
         }
 //        申请时间查询
         if (recruitCandidate.getCandidateStartTime() != null && !recruitCandidate.getCandidateStartTime().isEmpty()){
-            wrapper.between(RecruitCandidate::getCandidateStartTime, recruitCandidate.getCandidateStartTime(), recruitCandidate.getCandidateTime());
+            wrapper.ge(RecruitCandidate::getCandidateTime, recruitCandidate.getCandidateStartTime());
         }
         if (recruitCandidate.getCandidateEndTime() != null && !recruitCandidate.getCandidateEndTime().isEmpty()){
-            wrapper.between(RecruitCandidate::getCandidateEndTime, recruitCandidate.getCandidateEndTime(), recruitCandidate.getCandidateTime());
+            wrapper.le(RecruitCandidate::getCandidateTime, recruitCandidate.getCandidateEndTime());
         }
 
         List<RecruitCandidate> list = this.list(wrapper);
@@ -81,9 +81,9 @@ public class RecruitCandidateServiceImpl extends ServiceImpl<RecruitCandidateMap
     @Override
     public JsonResult addRecruitCandidate(RecruitCandidate recruitCandidate) {
         recruitCandidate.setCandidateStatus("1");
-        Date date = new Date();
-        String format = new SimpleDateFormat("yyyy-MM-dd").format(date);
-        recruitCandidate.setCandidateTime(format);
+//        Date date = new Date();
+//        String format = new SimpleDateFormat("yyyy-MM-dd").format(date);
+//        recruitCandidate.setCandidateTime(format);
         int insert = this.baseMapper.insert(recruitCandidate);
         if (insert>0){
             return JsonResult.ok("添加成功");

@@ -151,6 +151,7 @@ public class RecruitCandidate extends Page implements Serializable {
     //入库原因(1.能力不足，2个人原因.)
     private Integer candidateStorageReason;
 
+//
     @Excel(name = "状态", width = 20, isImportField = "true")
     //状态(1.进入候选人，2.进入人才库)
     private Integer candidateState;
@@ -177,4 +178,3 @@ public class RecruitCandidate extends Page implements Serializable {
     @TableField(exist = false)
     private RecruitJob recruitJob;
 }
-
