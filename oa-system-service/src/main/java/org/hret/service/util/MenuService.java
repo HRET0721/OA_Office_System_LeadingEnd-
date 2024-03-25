@@ -1,4 +1,4 @@
-package org.hret.service.personnel;
+package org.hret.service.util;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.hret.entity.utils.Menu;

@@ -20,6 +20,7 @@ import java.util.UUID;
  * Date:2024/3/21
  * version:1.0
  * oss文件上传工具类
+ *
  * @author HRET
  */
 public class OssFileUtil {
@@ -65,8 +66,8 @@ public class OssFileUtil {
      * @param imgFile 上传的图片文件
      * @return 返回图片的网络连接
      */
-    public static String uploadFile(MultipartFile imgFile){
-
+    public static String uploadFile(MultipartFile imgFile) {
+        //生成uuid
         String uuid = UUID.randomUUID().toString();
 
         //uuid,编码命名重复
@@ -139,7 +140,7 @@ public class OssFileUtil {
         }
     }
 
-    public static void  deleteFile(String fileName){
+    public static void deleteFile(String fileName) {
         // 创建OSSClient实例
         OSS ossClient = new OSSClientBuilder().build(ENDPOINT, ACCESS_KEY_ID, ACCESS_KEY_SECRET);
 

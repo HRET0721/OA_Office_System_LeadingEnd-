@@ -1,4 +1,4 @@
-package org.hret.controller.personnel;
+package org.hret.controller.util;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -21,7 +21,7 @@ import java.util.List;
 @CrossOrigin
 @RequiredArgsConstructor
 @RequestMapping(value = "menu")
-@Tag(name = "菜单方法", description = "菜单方法")
+@Tag(name = "菜单模块", description = "菜单模块")
 public class MenuController {
 
     private final MenuServiceImpl menuService;
