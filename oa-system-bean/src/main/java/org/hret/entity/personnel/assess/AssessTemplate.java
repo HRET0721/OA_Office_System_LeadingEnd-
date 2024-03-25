@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 考核模板表(AssessTemplate)实体类
@@ -66,7 +67,7 @@ public class AssessTemplate extends Page implements Serializable {
     /**
      * 评价权限
      */
-    private Object commentPermissions;
+    private String commentPermissions;
     /**
      * 邀请同事评价
      */
@@ -98,7 +99,7 @@ public class AssessTemplate extends Page implements Serializable {
 
 //封装考核指标
     @TableField(exist = false)
-    private AssessIndex assessIndex;
+    private List<AssessIndex> assessIndex;
 
 }
 
