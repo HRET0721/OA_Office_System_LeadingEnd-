@@ -10,6 +10,7 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hret.entity.personnel.leave.HolidayDalance;
 
 /**
     *Author:HRET Milky Way
@@ -46,5 +47,9 @@ public class Dept implements Serializable {
      */
     @TableField(exist = false)
     private List<User> userList;
+    @TableField(exist = false)
+    // 部门假期
+    private List<HolidayDalance> holidayDalances;
+
 
 }

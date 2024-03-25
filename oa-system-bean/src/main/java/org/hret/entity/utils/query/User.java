@@ -1,12 +1,15 @@
 package org.hret.entity.utils.query;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hret.entity.personnel.leave.HolidayDalance;
 
 /**
     *Author:HRET Milky Way
@@ -55,4 +58,7 @@ public class User implements Serializable {
     private Integer deptId;
 
     private static final long serialVersionUID = 1L;
+    @TableField(exist = false)
+    // 用户余额
+    private List<HolidayDalance> holidayDalances;
 }
