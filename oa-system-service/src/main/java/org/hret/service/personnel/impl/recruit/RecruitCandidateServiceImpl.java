@@ -13,7 +13,9 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Authar:liujintao
@@ -103,5 +105,18 @@ public class RecruitCandidateServiceImpl extends ServiceImpl<RecruitCandidateMap
     @Override
     public List<RecruitCandidate> findAll() {
         return this.list();
+    }
+
+    @Override
+    public Map<Object,Object> findConditionByNumber() {
+        HashMap<Object,Object> map = new HashMap<>();
+        map.put("job",this.baseMapper.selectCount(null));
+        map.put("job1",this.baseMapper.selectCount(Wrappers.lambdaQuery(RecruitCandidate.class).eq(RecruitCandidate::getCandidateStatus,"1")));
+        map.put("job2",this.baseMapper.selectCount(Wrappers.lambdaQuery(RecruitCandidate.class).eq(RecruitCandidate::getCandidateStatus,"2")));
+        map.put("job3",this.baseMapper.selectCount(Wrappers.lambdaQuery(RecruitCandidate.class).eq(RecruitCandidate::getCandidateStatus,"3")));
+        map.put("job4",this.baseMapper.selectCount(Wrappers.lambdaQuery(RecruitCandidate.class).eq(RecruitCandidate::getCandidateStatus,"4")));
+        map.put("job5",this.baseMapper.selectCount(Wrappers.lambdaQuery(RecruitCandidate.class).eq(RecruitCandidate::getCandidateStatus,"5")));
+        map.put("job6",this.baseMapper.selectCount(Wrappers.lambdaQuery(RecruitCandidate.class).eq(RecruitCandidate::getCandidateStatus,"6")));
+        return map;
     }
 }

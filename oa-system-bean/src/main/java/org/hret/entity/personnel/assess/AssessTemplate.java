@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import org.hret.entity.utils.query.Page;
 import org.springframework.stereotype.Component;
 
+import java.io.Serial;
 import java.util.Date;
 import java.io.Serializable;
 
@@ -25,6 +26,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Component
 public class AssessTemplate extends Page implements Serializable {
+    @Serial
     private static final long serialVersionUID = 779175493447493921L;
 /**
      * 模板id

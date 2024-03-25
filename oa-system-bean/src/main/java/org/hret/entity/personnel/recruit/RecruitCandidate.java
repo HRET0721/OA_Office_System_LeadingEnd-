@@ -5,9 +5,11 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import lombok.*;
 import org.hret.entity.utils.query.Page;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serial;
 import java.util.Date;
@@ -59,6 +61,8 @@ public class RecruitCandidate extends Page implements Serializable {
     //学历要求(1.博士及以上2.硕士3.本科4.大专5.高中6.不限)
     private String candidateEducation;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     @Excel(name = "出生日期", width = 20, isImportField = "true")
     //出生日期
     private Date candidateDateBirth;
@@ -79,6 +83,8 @@ public class RecruitCandidate extends Page implements Serializable {
     //籍贯
     private String candidateBirthplace;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     @Excel(name = "工作时间", width = 20, isImportField = "true")
     //工作时间
     private Date candidateWorkDate;
@@ -135,6 +141,8 @@ public class RecruitCandidate extends Page implements Serializable {
     //申请时间
     private String candidateTime;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     @Excel(name = "入库时间", width = 20, isImportField = "true")
     //入库时间
     private Date candidateStorage;
@@ -162,5 +170,11 @@ public class RecruitCandidate extends Page implements Serializable {
      */
     @TableField(exist = false)
     private String candidateEndTime;
+
+    /**
+     * 职位实体类
+     */
+    @TableField(exist = false)
+    private RecruitJob recruitJob;
 }
 

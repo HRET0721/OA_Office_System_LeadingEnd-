@@ -6,6 +6,7 @@ import org.hret.entity.personnel.recruit.RecruitCandidate;
 import org.hret.pojo.JsonResult;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Authar:liujintao
@@ -29,4 +30,6 @@ public interface RecruitCandidateService extends IService<RecruitCandidate> {
     JsonResult deleteRecruitCandidate(RecruitCandidate recruitCandidate);
 
     List<RecruitCandidate> findAll();
+
+    Map<Object, Object> findConditionByNumber();
 }
