@@ -11,8 +11,6 @@ import org.hret.pojo.JsonResult;
 import org.hret.service.personnel.recruit.RecruitCandidateService;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,6 +50,10 @@ public class RecruitCandidateServiceImpl extends ServiceImpl<RecruitCandidateMap
         }
         if (recruitCandidate.getCandidateEndTime() != null && !recruitCandidate.getCandidateEndTime().isEmpty()){
             wrapper.le(RecruitCandidate::getCandidateTime, recruitCandidate.getCandidateEndTime());
+        }
+//        状态条件查询
+        if (recruitCandidate.getCandidateStatus() != null && !recruitCandidate.getCandidateStatus().isEmpty()){
+            wrapper.eq(RecruitCandidate::getCandidateStatus, recruitCandidate.getCandidateStatus());
         }
 
         List<RecruitCandidate> list = this.list(wrapper);
