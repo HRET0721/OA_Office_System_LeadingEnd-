@@ -11,9 +11,9 @@ import org.hret.pojo.JsonResult;
 import org.hret.service.personnel.recruit.RecruitCandidateService;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Authar:liujintao
@@ -46,10 +46,14 @@ public class RecruitCandidateServiceImpl extends ServiceImpl<RecruitCandidateMap
         }
 //        申请时间查询
         if (recruitCandidate.getCandidateStartTime() != null && !recruitCandidate.getCandidateStartTime().isEmpty()){
-            wrapper.between(RecruitCandidate::getCandidateStartTime, recruitCandidate.getCandidateStartTime(), recruitCandidate.getCandidateTime());
+            wrapper.ge(RecruitCandidate::getCandidateTime, recruitCandidate.getCandidateStartTime());
         }
         if (recruitCandidate.getCandidateEndTime() != null && !recruitCandidate.getCandidateEndTime().isEmpty()){
-            wrapper.between(RecruitCandidate::getCandidateEndTime, recruitCandidate.getCandidateEndTime(), recruitCandidate.getCandidateTime());
+            wrapper.le(RecruitCandidate::getCandidateTime, recruitCandidate.getCandidateEndTime());
+        }
+//        状态条件查询
+        if (recruitCandidate.getCandidateStatus() != null && !recruitCandidate.getCandidateStatus().isEmpty()){
+            wrapper.eq(RecruitCandidate::getCandidateStatus, recruitCandidate.getCandidateStatus());
         }
 
         List<RecruitCandidate> list = this.list(wrapper);
@@ -79,9 +83,9 @@ public class RecruitCandidateServiceImpl extends ServiceImpl<RecruitCandidateMap
     @Override
     public JsonResult addRecruitCandidate(RecruitCandidate recruitCandidate) {
         recruitCandidate.setCandidateStatus("1");
-        Date date = new Date();
-        String format = new SimpleDateFormat("yyyy-MM-dd").format(date);
-        recruitCandidate.setCandidateTime(format);
+//        Date date = new Date();
+//        String format = new SimpleDateFormat("yyyy-MM-dd").format(date);
+//        recruitCandidate.setCandidateTime(format);
         int insert = this.baseMapper.insert(recruitCandidate);
         if (insert>0){
             return JsonResult.ok("添加成功");
@@ -103,5 +107,18 @@ public class RecruitCandidateServiceImpl extends ServiceImpl<RecruitCandidateMap
     @Override
     public List<RecruitCandidate> findAll() {
         return this.list();
+    }
+
+    @Override
+    public Map<Object,Object> findConditionByNumber() {
+        HashMap<Object,Object> map = new HashMap<>();
+        map.put("job",this.baseMapper.selectCount(null));
+        map.put("job1",this.baseMapper.selectCount(Wrappers.lambdaQuery(RecruitCandidate.class).eq(RecruitCandidate::getCandidateStatus,"1")));
+        map.put("job2",this.baseMapper.selectCount(Wrappers.lambdaQuery(RecruitCandidate.class).eq(RecruitCandidate::getCandidateStatus,"2")));
+        map.put("job3",this.baseMapper.selectCount(Wrappers.lambdaQuery(RecruitCandidate.class).eq(RecruitCandidate::getCandidateStatus,"3")));
+        map.put("job4",this.baseMapper.selectCount(Wrappers.lambdaQuery(RecruitCandidate.class).eq(RecruitCandidate::getCandidateStatus,"4")));
+        map.put("job5",this.baseMapper.selectCount(Wrappers.lambdaQuery(RecruitCandidate.class).eq(RecruitCandidate::getCandidateStatus,"5")));
+        map.put("job6",this.baseMapper.selectCount(Wrappers.lambdaQuery(RecruitCandidate.class).eq(RecruitCandidate::getCandidateStatus,"6")));
+        return map;
     }
 }

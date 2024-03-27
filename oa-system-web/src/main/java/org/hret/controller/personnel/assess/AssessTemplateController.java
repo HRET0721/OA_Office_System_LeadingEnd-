@@ -9,6 +9,8 @@ import org.hret.pojo.JsonResult;
 import org.hret.service.personnel.assess.AssessTemplateService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @author HRET
  */
@@ -19,6 +21,11 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "考核模板方法", description = "考核模板方法")
 public class AssessTemplateController {
     private final AssessTemplateService assessTemplateService;
+//    @RequestMapping(value = "getAssessTemplate", method = RequestMethod.GET)
+//    @Operation(summary = "根据考核模板id查询考核模板",description = "根据考核模板id查询考核模板")
+//    public List<AssessTemplate> getAssessTemplate(List<AssessTemplate> list) {
+//        return assessTemplateService.getAssessTemplate(list);
+//    }
     @RequestMapping(value = "findAssessTemplateListAndPage", method = RequestMethod.POST)
     @Operation(summary = "查询考核模板列表和分页",description = "查询考核模板列表和分页")
     public PageInfo<AssessTemplate> findAssessTemplateListAndPage(@RequestBody AssessTemplate assessTemplate)

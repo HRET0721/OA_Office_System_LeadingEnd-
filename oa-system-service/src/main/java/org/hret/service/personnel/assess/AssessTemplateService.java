@@ -5,6 +5,8 @@ import com.github.pagehelper.PageInfo;
 import org.hret.entity.personnel.assess.AssessTemplate;
 import org.hret.pojo.JsonResult;
 
+import java.util.List;
+
 public interface AssessTemplateService extends IService<AssessTemplate> {
 
     PageInfo<AssessTemplate> findAssessTemplateListAndPage(AssessTemplate assessTemplate);

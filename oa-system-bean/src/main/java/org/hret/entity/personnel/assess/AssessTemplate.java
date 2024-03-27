@@ -10,8 +10,10 @@ import lombok.NoArgsConstructor;
 import org.hret.entity.utils.query.Page;
 import org.springframework.stereotype.Component;
 
+import java.io.Serial;
 import java.util.Date;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 考核模板表(AssessTemplate)实体类
@@ -25,6 +27,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Component
 public class AssessTemplate extends Page implements Serializable {
+    @Serial
     private static final long serialVersionUID = 779175493447493921L;
 /**
      * 模板id
@@ -66,7 +69,7 @@ public class AssessTemplate extends Page implements Serializable {
     /**
      * 评价权限
      */
-    private Object commentPermissions;
+    private String commentPermissions;
     /**
      * 邀请同事评价
      */
@@ -98,7 +101,7 @@ public class AssessTemplate extends Page implements Serializable {
 
 //封装考核指标
     @TableField(exist = false)
-    private AssessIndex assessIndex;
+    private List<AssessIndex> assessIndex;
 
 }
 

@@ -3,11 +3,11 @@ package org.hret.controller.personnel.recruit;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import org.hret.entity.personnel.recruit.RecruitCandidate;
 import org.hret.pojo.EasyPoiUtils;
 import org.hret.pojo.JsonResult;
 import org.hret.service.personnel.recruit.RecruitCandidateService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,11 +19,12 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
+@RequiredArgsConstructor
 @RequestMapping(value = "recruitCandidate")
 @Tag(name = "候选人管理", description = "候选人管理")
 public class RecruitCandidateController {
-    @Autowired
-    private RecruitCandidateService recruitCandidateService;
+
+    private final RecruitCandidateService recruitCandidateService;
 
     @Operation(summary = "查询候选人", description = "查询候选人")
     @RequestMapping(value = "findByRecruitCandidatePage", method = RequestMethod.POST)
@@ -83,5 +84,15 @@ public class RecruitCandidateController {
     void exportData(HttpServletResponse response) {
         List<RecruitCandidate> all = recruitCandidateService.findAll();
         EasyPoiUtils.exportExcel(all, "日志导出", "日志导出", RecruitCandidate.class, "日志导出.xlsx", response);
+    }
+
+    @RequestMapping(value = "findConditionByNumber",method = RequestMethod.POST)
+    @Operation(summary = "查询职位条件", description = "查询职位条件")
+    public JsonResult findConditionByNumber() {
+        try{
+            return JsonResult.ok("查询成功", recruitCandidateService.findConditionByNumber());
+        }catch (Exception e){
+            return JsonResult.error("查询失败");
+        }
     }
 }
