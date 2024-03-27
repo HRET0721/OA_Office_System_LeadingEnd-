@@ -11,6 +11,7 @@ import org.hret.entity.utils.query.Page;
 import org.springframework.stereotype.Component;
 
 import java.io.Serial;
+import java.util.ArrayList;
 import java.util.Date;
 import java.io.Serializable;
 import java.util.List;
@@ -69,7 +70,7 @@ public class AssessTemplate extends Page implements Serializable {
     /**
      * 评价权限
      */
-    private String commentPermissions;
+    private List commentPermissions;
     /**
      * 邀请同事评价
      */
@@ -93,7 +94,7 @@ public class AssessTemplate extends Page implements Serializable {
     /**
      * 可执行人
      */
-    private Object executor;
+    private List executor;
     /**
      * 指派给指定人(0:手动调整;1自动跳过:;2:指派给指定人;)
      */

@@ -69,9 +69,9 @@ public class AssessTemplateServiceImpl extends ServiceImpl<AssessTemplateMapper,
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public JsonResult addAssessTemplate(AssessTemplate assessTemplate) {
         int insert = this.baseMapper.insert(assessTemplate);
-
         if (insert > 0) {
             return JsonResult.ok("添加成功");
         } else {
