@@ -18,4 +18,10 @@ public interface DeptService extends IService<Dept> {
      */
     List<Dept> findDeptUser();
 
+    /**
+     * 根据员工姓名查询部门
+     * @param userName
+     */
+    List<Dept> findDeptByUserName(String userName);
+
 }

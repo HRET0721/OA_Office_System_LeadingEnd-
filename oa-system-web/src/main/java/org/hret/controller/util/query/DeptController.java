@@ -5,10 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.hret.entity.utils.query.Dept;
 import org.hret.service.util.query.DeptService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,6 +28,12 @@ public class DeptController {
     @Operation(summary = "查询部门员工信息", description = "查询部门员工信息")
     public List<Dept> findDeptUser() {
         return deptService.findDeptUser();
+    }
+
+    @RequestMapping(value = "/findDeptByUserName", method = RequestMethod.GET)
+    @Operation(summary = "根据员工姓名查询部门", description = "根据员工姓名查询部门")
+    public List<Dept> findDeptByUserName(@RequestParam(value = "userName") String userName) {
+        return deptService.findDeptByUserName(userName);
     }
 
 }

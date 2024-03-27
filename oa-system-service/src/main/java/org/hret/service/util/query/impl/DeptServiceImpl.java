@@ -33,10 +33,26 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements De
         // 查询出部门下的员工信息
         for (Dept dept : deptList) {
             List<User> list = userService.lambdaQuery().eq(User::getDeptId, dept.getDeptId()).list();
-            // 统计部门下的员工数量
-            dept.setDeptCount(list.size());
             // 将员工信息放入部门信息中
             dept.setUserList(list);
+        }
+
+        // 返回部门信息
+        return deptList;
+    }
+
+    @Override
+    public List<Dept> findDeptByUserName(String userName) {
+
+        // 查询出员工信息并根据部门id去重 distinct：去重
+        List<User> list = userService.lambdaQuery().like(User::getUserName, userName).list().stream().distinct().toList();
+
+        // 查询出部门信息
+        List<Dept> deptList = this.listByIds(List.of(list.stream().map(User::getDeptId).toArray(Integer[]::new)));
+
+        // 将员工信息放入部门信息中
+        for (Dept dept : deptList) {
+            dept.setUserList(list.stream().filter(user -> user.getDeptId().equals(dept.getDeptId())).toList());
         }
 
         // 返回部门信息

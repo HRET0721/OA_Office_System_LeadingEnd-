@@ -36,12 +36,6 @@ public class Dept implements Serializable {
     private String deptName;
 
     /**
-     * 部门人数
-     */
-    @TableField(exist = false)
-    private Integer deptCount;
-
-    /**
      * 部门员工信息
      */
     @TableField(exist = false)
