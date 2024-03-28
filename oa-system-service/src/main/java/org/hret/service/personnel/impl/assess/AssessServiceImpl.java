@@ -4,17 +4,40 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import lombok.RequiredArgsConstructor;
 import org.hret.entity.personnel.assess.Assess;
+import org.hret.entity.personnel.assess.AssessRecruitJob;
+import org.hret.entity.personnel.assess.DeptAssess;
+import org.hret.entity.personnel.assess.UserAssess;
+import org.hret.entity.personnel.recruit.RecruitJob;
+import org.hret.entity.utils.query.Dept;
+import org.hret.entity.utils.query.User;
 import org.hret.mapper.personnel.assess.AssessMapper;
 import org.hret.pojo.JsonResult;
+import org.hret.service.personnel.assess.AssessRecruitJobService;
 import org.hret.service.personnel.assess.AssessService;
+import org.hret.service.personnel.assess.DeptAssessService;
+import org.hret.service.personnel.assess.UserAssessService;
+import org.hret.service.personnel.recruit.RecruitJobService;
+import org.hret.service.util.query.DeptService;
+import org.hret.service.util.query.UserService;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author HRET
  */
 @Service
+@RequiredArgsConstructor
 public class AssessServiceImpl extends ServiceImpl<AssessMapper, Assess> implements AssessService {
+    private final DeptService deptService;
+    private final DeptAssessService deptAssessService;
+    private final RecruitJobService recruitJobService;
+    private final AssessRecruitJobService assessRecruitJobService;
+    private final UserService userService;
+    private final UserAssessService userAssessService;
     @Override
     public PageInfo<Assess> findAssessListAndPage(Assess assess) {
 
@@ -35,6 +58,56 @@ public class AssessServiceImpl extends ServiceImpl<AssessMapper, Assess> impleme
         }
 
         return new PageInfo<>(list(queryWrapper));
+    }
+    @Override
+    public PageInfo<Assess> findAssessAndUserListAndPage(Assess assess) {
+        PageHelper.startPage(assess.getPageNum(), assess.getPageSize());
+        QueryWrapper<Assess> queryWrapper = new QueryWrapper<>();
+        if ( assess.getAssessName() != null && !"".equals(assess.getAssessName()) ) {
+            queryWrapper.like("assess_name", assess.getAssessName());
+        }
+        List<Assess> list = this.list(queryWrapper);
+        list = getUserAndAssess(list);
+        return new PageInfo<>(list);
+    }
+    public List<Assess> getUserAndAssess(List<Assess> list) {
+
+        for (Assess assess : list) {
+            Integer assessId = assess.getAssessId();
+            if (assessId != null) {
+                //        考核和用户联查
+                List<DeptAssess> deptAssessList = deptAssessService.lambdaQuery().eq(DeptAssess::getAssessId, assessId).list();
+                for (DeptAssess deptAssess : deptAssessList) {
+                    Integer deptId = deptAssess.getDeptId();
+                    Dept dept = deptService.lambdaQuery().eq(Dept::getDeptId, deptId).one();
+                    if (assess.getDepts() == null) {
+                        assess.setDepts(new ArrayList<>());
+                    }
+                    assess.getDepts().add(dept);
+                }
+            }
+//                职位和考核联查
+            List<AssessRecruitJob> recruitJobList = assessRecruitJobService.lambdaQuery().eq(AssessRecruitJob::getAssessId, assessId).list();
+            for (AssessRecruitJob assessRecruitJob : recruitJobList) {
+                Integer recruitJobJobId = assessRecruitJob.getJobId();
+                RecruitJob recruitJob1 = recruitJobService.lambdaQuery().eq(RecruitJob::getJobId, recruitJobJobId).one();
+                if (assess.getRecruitJobs() == null) {
+                    assess.setRecruitJobs(new ArrayList<>());
+                }
+                assess.getRecruitJobs().add(recruitJob1);
+            }
+//                用户和考核联查
+            List<UserAssess> userAssesses = userAssessService.lambdaQuery().eq(UserAssess::getAssessId, assessId).list();
+            for (UserAssess userAssess : userAssesses) {
+                Integer userAssessId = userAssess.getUserId();
+                User user = userService.lambdaQuery().eq(User::getUserId, userAssessId).one();
+                if (assess.getUsers() == null) {
+                    assess.setUsers(new ArrayList<>());
+                }
+                assess.getUsers().add(user);
+            }
+        }
+        return list;
     }
 
     @Override
@@ -80,4 +153,6 @@ public class AssessServiceImpl extends ServiceImpl<AssessMapper, Assess> impleme
         }
 
     }
+
+
 }
