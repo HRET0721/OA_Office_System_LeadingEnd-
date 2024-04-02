@@ -65,9 +65,9 @@ public class RecruitCandidateController {
 
     @Operation(summary = "删除候选人", description = "删除候选人")
     @RequestMapping(value = "deleteRecruitCandidate", method = RequestMethod.POST)
-    public JsonResult deleteRecruitCandidate(@RequestBody RecruitCandidate recruitCandidate) {
+    public JsonResult deleteRecruitCandidate(@RequestParam(value="candidateId") Long candidateId) {
         try{
-            return recruitCandidateService.deleteRecruitCandidate(recruitCandidate);
+            return recruitCandidateService.deleteRecruitCandidate(candidateId);
         }catch (Exception e){
             return JsonResult.error("删除失败");
         }
@@ -93,6 +93,37 @@ public class RecruitCandidateController {
             return JsonResult.ok("查询成功", recruitCandidateService.findConditionByNumber());
         }catch (Exception e){
             return JsonResult.error("查询失败");
+        }
+    }
+
+    @RequestMapping(value = "updateRecruitcandidateTalentPoolStatus",method = RequestMethod.POST)
+    @Operation(summary = "更新人才库状态", description = "更新人才库状态")
+    public JsonResult updateRecruitcandidateTalentPoolStatus(@RequestBody RecruitCandidate recruitCandidate) {
+        try{
+            return recruitCandidateService.updateRecruitcandidateTalentPoolStatus(recruitCandidate);
+        }catch (Exception e){
+            return JsonResult.error("更新失败");
+        }
+//        return recruitCandidateService.updateRecruitcandidateTalentPoolStatus(recruitCandidate);
+    }
+
+    @RequestMapping(value = "findcandidateTalentPoolStatusByNumber",method = RequestMethod.POST)
+    @Operation(summary = "查询人才库状态", description = "查询人才库状态")
+    public JsonResult findcandidateTalentPoolStatusByNumber() {
+        try{
+            return JsonResult.ok("查询成功", recruitCandidateService.findcandidateTalentPoolStatusByNumber());
+        }catch (Exception e){
+            return JsonResult.error("查询失败");
+        }
+    }
+
+    @RequestMapping(value = "updateRecruitcandidateState",method = RequestMethod.POST)
+    @Operation(summary = "更新候选人状态", description = "更新候选人状态")
+    public JsonResult updateRecruitcandidateState(@RequestBody RecruitCandidate recruitCandidate) {
+        try{
+            return recruitCandidateService.updateRecruitcandidateState(recruitCandidate);
+        }catch (Exception e){
+            return JsonResult.error("更新失败");
         }
     }
 }

@@ -121,7 +121,28 @@ public class RecruitJob extends Page implements Serializable {
      */
     @Excel(name = "发起时间",width = 20,isImportField = "true")
     private String jobTime;
+    /**
+     * 计划开始时间
+     */
+    @Excel(name = "计划开始时间",width = 20,isImportField = "true")
+    private String jobPostStartTime;
+    /**
+     * 计划结束时间
+     */
+    @Excel(name = "计划结束时间",width = 20,isImportField = "true")
+    private String jobPostEndTime;
 
+    /*8
+    性别
+     */
+    @Excel(name = "性别",width = 20,isImportField = "true")
+    private Integer jobSex;
+
+    /**
+     * 年龄
+     */
+    @Excel(name = "年龄",width = 20,isImportField = "true")
+    private String jobAge;
     /**
      * 开始时间
      */
