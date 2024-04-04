@@ -27,9 +27,17 @@ public interface RecruitCandidateService extends IService<RecruitCandidate> {
     JsonResult addRecruitCandidate(RecruitCandidate recruitCandidate);
 
     //    删除数据
-    JsonResult deleteRecruitCandidate(RecruitCandidate recruitCandidate);
+    JsonResult deleteRecruitCandidate(Long candidateId);
 
     List<RecruitCandidate> findAll();
 
+//    查询条件
     Map<Object, Object> findConditionByNumber();
+
+//    修改人才库状态
+    JsonResult updateRecruitcandidateTalentPoolStatus(RecruitCandidate recruitCandidate);
+//    查询人才库状态
+    Map<Object,Object> findcandidateTalentPoolStatusByNumber();
+
+    JsonResult updateRecruitcandidateState(RecruitCandidate recruitCandidate);
 }

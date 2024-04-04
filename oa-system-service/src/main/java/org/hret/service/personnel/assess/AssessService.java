@@ -20,4 +20,5 @@ public interface AssessService  extends IService<Assess> {
 
     JsonResult updateAssessMent(Assess assess);
 
+    PageInfo<Assess> findAssessAndUserListAndPage(Assess assess);
 }

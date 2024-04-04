@@ -78,7 +78,6 @@ public class RecruitJobController {
         return recruitJobService.findAll();
     }
 
-
     @RequestMapping(value = "exportData")
     @Operation(summary = "导出数据", description = "导出数据")
     void exportData(HttpServletResponse response) {

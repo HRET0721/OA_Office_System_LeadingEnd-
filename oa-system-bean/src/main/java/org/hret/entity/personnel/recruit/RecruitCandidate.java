@@ -41,7 +41,7 @@ public class RecruitCandidate extends Page implements Serializable {
     @Excel(name = "职位关联id", width = 20, isImportField = "true")
     private Integer jobId;
 
-    @Excel(name = "职位名称", width = 20, isImportField = "true")
+    @Excel(name = "职位状态", width = 20, isImportField = "true")
     //流程(1.等待面试，2.面试中，3.面试通过)
     private String candidateStatus;
 
@@ -51,7 +51,7 @@ public class RecruitCandidate extends Page implements Serializable {
 
     @Excel(name = "性别", width = 20, isImportField = "true")
     //性别
-    private String candidateSex;
+    private Integer candidateSex;
 
     @Excel(name = "手机号", width = 20, isImportField = "true")
     //手机号
@@ -62,7 +62,7 @@ public class RecruitCandidate extends Page implements Serializable {
     private String candidateEducation;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSX")
     @Excel(name = "出生日期", width = 20, isImportField = "true")
     //出生日期
     private Date candidateDateBirth;
@@ -77,14 +77,14 @@ public class RecruitCandidate extends Page implements Serializable {
 
     @Excel(name = "婚姻状况", width = 20, isImportField = "true")
     //婚姻状况
-    private String candidateMarriage;
+    private Integer candidateMarriage;
 
     @Excel(name = "籍贯", width = 20, isImportField = "true")
     //籍贯
     private String candidateBirthplace;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSX")
     @Excel(name = "工作时间", width = 20, isImportField = "true")
     //工作时间
     private Date candidateWorkDate;
@@ -142,7 +142,7 @@ public class RecruitCandidate extends Page implements Serializable {
     private String candidateTime;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @Excel(name = "入库时间", width = 20, isImportField = "true")
     //入库时间
     private Date candidateStorage;
@@ -150,11 +150,6 @@ public class RecruitCandidate extends Page implements Serializable {
     @Excel(name = "入库原因", width = 20, isImportField = "true")
     //入库原因(1.能力不足，2个人原因.)
     private Integer candidateStorageReason;
-
-//
-    @Excel(name = "状态", width = 20, isImportField = "true")
-    //状态(1.进入候选人，2.进入人才库)
-    private Integer candidateState;
 
     @Excel(name = "部门", width = 20, isImportField = "true")
     //部门(1.技术部，2.产品部，3.销售部，4.行政部)
@@ -177,4 +172,15 @@ public class RecruitCandidate extends Page implements Serializable {
      */
     @TableField(exist = false)
     private RecruitJob recruitJob;
+
+    /**
+     * 判断是人才库还是候选人
+     */
+    private Integer candidateState;
+
+    /**
+     * 人才库状态
+     */
+    @Excel(name = "人才库状态", width = 20, isImportField = "true")
+    private String candidateTalentPoolStatus;
 }

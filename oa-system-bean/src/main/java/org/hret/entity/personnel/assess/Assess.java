@@ -1,16 +1,22 @@
 package org.hret.entity.personnel.assess;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hret.entity.personnel.recruit.RecruitCandidate;
+import org.hret.entity.personnel.recruit.RecruitJob;
+import org.hret.entity.utils.query.Dept;
 import org.hret.entity.utils.query.Page;
+import org.hret.entity.utils.query.User;
 import org.springframework.stereotype.Component;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 考核表(Assess)实体类
@@ -71,8 +77,14 @@ public class Assess extends Page implements Serializable{
 /**
      * 考核计划类型(0:周期;1:非周期;)
      */
+    private String assessScore;
     private String assessType;
-
+    @TableField(exist = false)
+    private List<Dept> depts;
+    @TableField(exist = false)
+    private List<RecruitJob> recruitJobs;
+    @TableField(exist = false)
+    private List<User> users;
 
 }
 

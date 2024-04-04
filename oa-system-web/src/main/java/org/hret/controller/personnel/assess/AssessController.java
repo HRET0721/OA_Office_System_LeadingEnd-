@@ -24,6 +24,11 @@ public class AssessController {
     public PageInfo<Assess> findAssessListAndPage(@RequestBody Assess assess) {
         return assessService.findAssessListAndPage(assess);
     }
+    @RequestMapping(value = "findAssessAndUserListAndPage",method = RequestMethod.POST)
+    @Operation(summary = "查询考核方法和用户列表和分页",description = "查询考核列表和分页")
+    public PageInfo<Assess> findAssessAndUserListAndPage(@RequestBody Assess assess) {
+        return assessService.findAssessAndUserListAndPage(assess);
+    }
     @RequestMapping(value = "addAssessMent",method = RequestMethod.POST)
     @Operation(summary = "添加考核方法",description = "添加考核方法")
     public JsonResult addAssessMent(@RequestBody Assess assess) {
