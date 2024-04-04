@@ -4,11 +4,12 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.hret.entity.utils.Menu;
+import org.hret.pojo.RedisDeleteUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
-import org.hret.service.personnel.impl.MenuServiceImpl;
+import org.hret.service.util.impl.MenuServiceImpl;
 
 import java.util.List;
 
@@ -52,6 +53,12 @@ public class MenuController {
         redisTemplate.opsForValue().set("menuList：" + parentId, menus);
 
         return menus;
+    }
+
+    @RequestMapping(value = "deleteMenuRedis", method = RequestMethod.GET)
+    @Operation(summary = "删除菜单缓存", description = "删除菜单缓存")
+    public void deleteMenuRedis() {
+        new RedisDeleteUtils().deleteByPattern(redisTemplate, "menuList：*");
     }
 
 }

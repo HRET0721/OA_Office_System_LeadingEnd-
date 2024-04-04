@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>oa-system-common</artifactId>
+    <name>公共模块</name>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

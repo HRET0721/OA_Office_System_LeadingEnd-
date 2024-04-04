@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>oa-system-web</artifactId>
+    <name>控制层模块</name>
 
     <dependencies>
         <dependency>

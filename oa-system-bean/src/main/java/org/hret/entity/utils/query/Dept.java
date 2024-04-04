@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
@@ -23,6 +25,7 @@ import org.hret.entity.personnel.leave.HolidayDalance;
 @NoArgsConstructor
 public class Dept implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
@@ -41,9 +44,9 @@ public class Dept implements Serializable {
      */
     @TableField(exist = false)
     private List<User> userList;
+
     @TableField(exist = false)
     // 部门假期
     private List<HolidayDalance> holidayDalances;
-
 
 }

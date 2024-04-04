@@ -8,6 +8,8 @@
     <groupId>org.hret</groupId>
     <!--  项目名称  -->
     <artifactId>oa-system</artifactId>
+    <!--  项目描述  -->
+    <name>OA数字化办公平台</name>
     <!--  项目版本  -->
     <version>1.0</version>
 
@@ -18,7 +20,6 @@
     <modules>
         <module>oa-system-common</module>
         <module>oa-system-web</module>
-        <module>oa-system-security</module>
         <module>oa-system-mapper</module>
         <module>oa-system-service</module>
         <module>oa-system-bean</module>
@@ -84,12 +85,12 @@
             </dependency>
             <dependency>
                 <groupId>org.hret</groupId>
-                <artifactId>oa-system-security</artifactId>
+                <artifactId>oa-system-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.hret</groupId>
-                <artifactId>oa-system-service</artifactId>
+                <artifactId>oa-system-oauth-server</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>oa-system-service</artifactId>
+    <name>业务层模块</name>
 
     <dependencies>
         <dependency>

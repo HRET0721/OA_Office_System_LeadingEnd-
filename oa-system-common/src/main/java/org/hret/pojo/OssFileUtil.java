@@ -26,7 +26,7 @@ import java.util.UUID;
 public class OssFileUtil {
     /**
      * 需要的依赖
-     * <!--        oss对象存储-->
+     * <!--     oss对象存储     -->
      * <dependency>
      * <groupId>com.aliyun.oss</groupId>
      * <artifactId>aliyun-sdk-oss</artifactId>
@@ -42,7 +42,7 @@ public class OssFileUtil {
      * <artifactId>activation</artifactId>
      * <version>1.1.1</version>
      * </dependency>
-     * <!-- no more than 2.3.3-->
+     * <!-- no more than 2.3.3 -->
      * <dependency>
      * <groupId>org.glassfish.jaxb</groupId>
      * <artifactId>jaxb-runtime</artifactId>
