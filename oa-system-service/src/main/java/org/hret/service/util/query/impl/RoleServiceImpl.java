@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.collections4.ListUtils;
 import org.hret.entity.utils.Menu;
 import org.hret.entity.utils.query.Role;
 import org.hret.entity.utils.query.RoleMenu;
@@ -19,7 +18,6 @@ import org.hret.mapper.util.query.UserMapper;
 import org.hret.mapper.util.query.UserRoleMapper;
 import org.hret.pojo.JsonResult;
 import org.hret.service.util.query.RoleService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -53,9 +51,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
             // 根据角色id查询所关联的用户id
             List<UserRole> userRoles = userRoleMapper.selectList(Wrappers.<UserRole>lambdaQuery().eq(UserRole::getRoleId, role.getRoleId()));
             List<User> users = new ArrayList<>();
-            userRoles.forEach(userRole -> {
-                users.add(userMapper.selectOne(Wrappers.<User>lambdaQuery().eq(User::getUserId, userRole.getUserId())));
-            });
+            userRoles.forEach(userRole -> users.add(userMapper.selectOne(Wrappers.<User>lambdaQuery().eq(User::getUserId, userRole.getUserId()))));
             role.setUsers(users);
 
             // 判断是否为超级管理员 注：超级管理员拥有所有权限
@@ -63,13 +59,12 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
                 // 不为超级管理员查询所拥有的权限
                 // 根据角色id查询所关联的权限id
                 List<RoleMenu> roleMenus = roleMenuMapper.selectList(Wrappers.<RoleMenu>lambdaQuery().eq(RoleMenu::getRoleId, role.getRoleId()));
-                // 创建权限集合
-                List<Menu> menus = new ArrayList<>();
-                roleMenus.forEach(roleMenu -> {
-                    menus.add(menuMapper.selectOne(Wrappers.<Menu>lambdaQuery().eq(Menu::getMenuId, roleMenu.getMenuId())));
-                });
-                // 将权限集合添加到角色中
-                role.setMenus(menus);
+                // 创建权限id集合
+                List<Integer> menus = new ArrayList<>();
+                // 将权限id添加到权限id集合中
+                roleMenus.forEach(roleMenu -> menus.add(roleMenu.getMenuId()));
+                // 根据权限id集合查询权限
+                role.setMenus(menuMapper.selectList(Wrappers.<Menu>lambdaQuery().in(Menu::getMenuId, menus)));
             }
         });
 
@@ -130,9 +125,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
             // 判断是否有添加权限
             if ( role.getMenus() != null && !role.getMenus().isEmpty()) {
                 // 添加权限
-                role.getMenus().forEach(menu -> {
-                    roleMenuMapper.insert(new RoleMenu(role.getRoleId(), Math.toIntExact(menu.getMenuId())));
-                });
+                role.getMenus().forEach(menu -> roleMenuMapper.insert(new RoleMenu(role.getRoleId(), Math.toIntExact(menu.getMenuId()))));
             }
         } else {
             return JsonResult.error("添加角色失败");
@@ -155,9 +148,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
                 roleMenuMapper.delete(Wrappers.<RoleMenu>lambdaQuery().eq(RoleMenu::getRoleId, role.getRoleId()));
 
                 // 添加权限
-                role.getMenus().forEach(menu -> {
-                    roleMenuMapper.insert(new RoleMenu(role.getRoleId(), Math.toIntExact(menu.getMenuId())));
-                });
+                role.getMenus().forEach(menu -> roleMenuMapper.insert(new RoleMenu(role.getRoleId(), Math.toIntExact(menu.getMenuId()))));
             }
         }else{
             return JsonResult.error("更新角色失败");
