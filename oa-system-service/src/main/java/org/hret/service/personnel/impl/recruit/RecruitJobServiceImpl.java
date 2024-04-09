@@ -80,9 +80,9 @@ public class RecruitJobServiceImpl extends ServiceImpl<RecruitJobMapper, Recruit
     @Override
     public JsonResult addJob(RecruitJob recruitJob) {
         recruitJob.setJobStatus("1");
-        Date date = new Date();
-        String format = new SimpleDateFormat("yyyy-MM-dd").format(date);
-        recruitJob.setJobTime(format);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String formattedDate = sdf.format(new Date());
+        recruitJob.setJobTime(formattedDate);
         int insert = this.baseMapper.insert(recruitJob);
         if (insert > 0){
             return JsonResult.ok("添加成功");
