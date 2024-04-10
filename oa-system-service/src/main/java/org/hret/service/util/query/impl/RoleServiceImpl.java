@@ -16,10 +16,10 @@ import org.hret.mapper.util.query.RoleMapper;
 import org.hret.mapper.util.query.RoleMenuMapper;
 import org.hret.mapper.util.query.UserMapper;
 import org.hret.mapper.util.query.UserRoleMapper;
-import org.hret.pojo.JsonResult;
 import org.hret.service.util.query.RoleService;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import org.hret.pojo.JsonResult;
 
 import java.util.ArrayList;
 import java.util.Arrays;
