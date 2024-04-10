@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
 
-import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -22,7 +21,6 @@ import java.io.Serializable;
 @Component
 public class JsonResult implements Serializable {
 
-    @Serial
     private static final long serialVersionUID = -5486653975868600354L;
 
     private Integer code;
@@ -31,6 +29,10 @@ public class JsonResult implements Serializable {
 
     public static JsonResult error(String msg) {
         return new JsonResult(500, msg, null);
+    }
+
+    public static JsonResult error(String msg, Object data) {
+        return new JsonResult(500, msg, data);
     }
 
     public static JsonResult ok(String msg) {

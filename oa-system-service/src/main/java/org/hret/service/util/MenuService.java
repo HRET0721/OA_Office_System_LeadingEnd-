@@ -17,7 +17,6 @@ public interface MenuService extends IService<Menu> {
 
     /**
      * 查询菜单列表
-     *
      * @param parentId 父菜单id
      * @return 菜单列表
      */

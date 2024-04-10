@@ -73,25 +73,27 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
     }
 
     @Override
-    public Role getAuthorizationRole(String userId) {
+    public JsonResult getAuthorizationRole(String roleId, String path) {
 
-        // 根据用户id查询角色id
-        UserRole userRoles = userRoleMapper.selectOne(Wrappers.<UserRole>lambdaQuery().eq(UserRole::getUserId, userId));
+        // 查询角色
+        Role role = this.getById(roleId);
 
-        // 创建角色
-        Role role = null;
-
-        // 判断是否查询到角色id
-        if ( userRoles.getRoleId() != null ) {
-            // 查询角色
-            role = this.getById(userRoles.getRoleId());
-            if ( role != null ) {
-                role.setMenus(menuMapper.selectList(Wrappers.<Menu>lambdaQuery().in(Menu::getMenuId, roleMenuMapper.selectList(Wrappers.<RoleMenu>lambdaQuery().eq(RoleMenu::getRoleId, role.getRoleId())).stream().map(RoleMenu::getMenuId).toArray())));
+        // 判断角色是否存在
+        if ( role != null ) {
+            // 根据角色id查询所关联的权限id
+            List<RoleMenu> roleMenus = roleMenuMapper.selectList(Wrappers.<RoleMenu>lambdaQuery().eq(RoleMenu::getRoleId, role.getRoleId()));
+            // 创建权限id集合
+            List<Integer> menus = new ArrayList<>();
+            // 将权限id添加到权限id集合中
+            roleMenus.forEach(roleMenu -> menus.add(roleMenu.getMenuId()));
+            // 查询是否这个权限
+            Menu menu = menuMapper.selectOne(Wrappers.<Menu>lambdaQuery().in(Menu::getMenuId, menus).eq(Menu::getMenuPath, path));
+            if ( menu != null ) {
+                return JsonResult.ok("有权限操作");
             }
         }
 
-        // 返回角色
-        return role;
+        return JsonResult.error("无权限操作");
     }
 
     @Override
@@ -166,6 +168,8 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
         if (remove > 0) {
             // 删除角色权限
             roleMenuMapper.deleteBatchIds(Arrays.asList(roleId));
+            // 删除用户角色
+            userRoleMapper.delete(Wrappers.<UserRole>lambdaQuery().eq(UserRole::getRoleId, roleId));
         }else {
             return JsonResult.error("删除角色失败");
         }
