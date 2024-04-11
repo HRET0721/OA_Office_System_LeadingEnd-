@@ -57,7 +57,10 @@ public class User implements Serializable {
     */
     private Integer deptId;
 
-    private static final long serialVersionUID = 1L;
+    @TableField(exist = false)
+    // 角色对象
+    private Role role;
+
     @TableField(exist = false)
     // 用户余额
     private List<HolidayDalance> holidayDalances;

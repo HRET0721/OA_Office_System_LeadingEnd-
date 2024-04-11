@@ -4,9 +4,13 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
+import org.hret.entity.utils.query.Role;
 import org.hret.entity.utils.query.User;
+import org.hret.entity.utils.query.UserRole;
+import org.hret.mapper.util.query.UserRoleMapper;
 import org.hret.pojo.GetCaptcha;
 import org.hret.pojo.JsonResult;
+import org.hret.service.util.query.RoleService;
 import org.hret.service.util.query.UserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +30,8 @@ import java.util.List;
 public class UserController {
 
     private UserService userService;
+    private UserRoleMapper userRoleMapper;
+    private RoleService roleService;
 
     @RequestMapping(value = "getCaptcha", method = RequestMethod.POST)
     @Operation(summary = "获取验证码验证状态", description = "获取验证码验证状态")
@@ -51,6 +57,10 @@ public class UserController {
             // TODO: 验证用户密码
             for (User data : list) {
                 if ( data.getUserPassword().equals(user.getUserPassword()) ){
+                    // 获取关联的角色id
+                    UserRole userRoles = userRoleMapper.selectOne(Wrappers.<UserRole>lambdaQuery().eq(UserRole::getUserId, data.getUserId()));
+                    // 根据角色id查询信息并存入用户信息中
+                    data.setRole(roleService.getOne(Wrappers.<Role>lambdaQuery().eq(Role::getRoleId, userRoles.getRoleId())));
                     // TODO: 用户登录成功
                     return JsonResult.ok("登录成功", data);
                 }
