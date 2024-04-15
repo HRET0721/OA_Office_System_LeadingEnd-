@@ -88,11 +88,6 @@
                 <artifactId>oa-system-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.hret</groupId>
-                <artifactId>oa-system-oauth-server</artifactId>
-                <version>${project.version}</version>
-            </dependency>
 
             <!-- springboot依赖管理 -->
             <dependency>
@@ -190,24 +185,27 @@
         </profile>
     </profiles>
 
-
     <!--maven插件-->
     <build>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
                 <configuration>
-                    <mainClass>none</mainClass>     <!-- 取消查找本项目下的Main方法：为了解决Unable to find main class的问题 -->
-                    <classifier>execute</classifier>    <!-- 为了解决依赖模块找不到此模块中的类或属性 -->
+                    <compilerArgs>
+<!--                    在编译时就会保留方法参数名，Spring框架就能直接从字节码中读取到参数名，避免了使用调试信息的方式    -->
+                        <arg>-parameters</arg>
+                    </compilerArgs>
                 </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.19.1</version>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
             </plugin>
         </plugins>
     </build>
