@@ -58,6 +58,8 @@
         <spring-session-redis.version>3.1.0</spring-session-redis.version>
         <!-- knife4j版本 api文档增强 -->
         <knife4j.version>4.1.0</knife4j.version>
+        <!--AMQP依赖，包含RabbitMQ-->
+        <spring-boot-amqp.version>3.1.5</spring-boot-amqp.version>
     </properties>
 
     <!--  全局依赖管理  -->
@@ -163,6 +165,14 @@
                 <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
                 <version>${knife4j.version}</version>
             </dependency>
+            <!--AMQP依赖，包含RabbitMQ-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-amqp</artifactId>
+                <version>${spring-boot-amqp.version}</version>
+            </dependency>
+
+
         </dependencies>
     </dependencyManagement>
 
