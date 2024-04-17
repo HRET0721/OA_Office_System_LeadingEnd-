@@ -1,7 +1,6 @@
 package org.hret.service.personnel.impl.leave;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -13,12 +12,8 @@ import org.hret.mapper.personnel.leave.HolidayDalanceMapper;
 import org.hret.mapper.util.query.DeptMapper;
 import org.hret.mapper.util.query.UserMapper;
 import org.hret.pojo.JsonResult;
-import org.hret.service.personnel.leave.DeptHoliddayService;
 import org.hret.service.personnel.leave.HolidayDalanceService;
-import org.hret.service.util.query.impl.DeptServiceImpl;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

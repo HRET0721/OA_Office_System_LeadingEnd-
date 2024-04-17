@@ -88,11 +88,6 @@
                 <artifactId>oa-system-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.hret</groupId>
-                <artifactId>oa-system-oauth-server</artifactId>
-                <version>${project.version}</version>
-            </dependency>
 
             <!-- springboot依赖管理 -->
             <dependency>

@@ -10,6 +10,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hret.entity.personnel.leave.HolidayDalance;
+import org.hret.entity.personnel.leave.HolidayOperate;
+
 
 /**
     *Author:HRET Milky Way
@@ -61,4 +63,6 @@ public class User implements Serializable {
     @TableField(exist = false)
     // 用户余额
     private List<HolidayDalance> holidayDalances;
+    @TableField(exist = false)
+    private List<HolidayOperate>holidayOperates;
 }
