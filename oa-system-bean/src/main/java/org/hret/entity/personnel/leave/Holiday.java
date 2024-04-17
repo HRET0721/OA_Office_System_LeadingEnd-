@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
 @EqualsAndHashCode(callSuper = false)
 @Data
 @NoArgsConstructor
@@ -134,6 +136,7 @@ public class Holiday extends Page implements Serializable {
      * 一天折算
      */
     private String oneConversion;
+//    private List<HolidayOperate> holidayOperate;
 
 
 }

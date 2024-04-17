@@ -8,11 +8,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.hret.entity.utils.query.Dept;
 import org.hret.entity.utils.query.Page;
-import org.hret.entity.utils.query.User;
 import org.springframework.stereotype.Component;
 
 import java.io.Serial;
@@ -68,5 +65,7 @@ public class HolidayDalance extends Page implements Serializable {
     private String deptName;
     @TableField(exist = false)
     private String userNames;
+    @TableField(exist = false)
+    private List<HolidayOperate>holidayOperates;
 
 }

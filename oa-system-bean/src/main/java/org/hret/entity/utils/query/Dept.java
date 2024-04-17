@@ -3,7 +3,7 @@ package org.hret.entity.utils.query;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import io.swagger.annotations.ApiModelProperty;
+
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -13,6 +13,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hret.entity.personnel.leave.HolidayDalance;
+import org.hret.entity.personnel.leave.HolidayOperate;
 
 /**
     *Author:HRET Milky Way
@@ -48,5 +49,7 @@ public class Dept implements Serializable {
     @TableField(exist = false)
     // 部门假期
     private List<HolidayDalance> holidayDalances;
+    @TableField(exist = false)
+    private List<HolidayOperate>holidayOperates;
 
 }
