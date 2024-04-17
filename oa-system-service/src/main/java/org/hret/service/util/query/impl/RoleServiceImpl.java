@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.hret.entity.utils.Menu;
 import org.hret.entity.utils.query.Role;
 import org.hret.entity.utils.query.RoleMenu;
@@ -13,13 +13,13 @@ import org.hret.entity.utils.query.User;
 import org.hret.entity.utils.query.UserRole;
 import org.hret.mapper.util.MenuMapper;
 import org.hret.mapper.util.query.RoleMapper;
-import org.hret.mapper.util.query.RoleMenuMapper;
 import org.hret.mapper.util.query.UserMapper;
 import org.hret.mapper.util.query.UserRoleMapper;
-import org.hret.pojo.JsonResult;
+import org.hret.service.util.query.RoleMenuService;
 import org.hret.service.util.query.RoleService;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import org.hret.pojo.JsonResult;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,13 +32,13 @@ import java.util.List;
  * description TODO
  */
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements RoleService {
 
-    private final RoleMenuMapper roleMenuMapper;
-    private final UserRoleMapper userRoleMapper;
-    private final UserMapper userMapper;
-    private final MenuMapper menuMapper;
+    private RoleMenuService roleMenuService;
+    private UserRoleMapper userRoleMapper;
+    private UserMapper userMapper;
+    private MenuMapper menuMapper;
 
     /**
      * 封装角色关联信息
@@ -58,7 +58,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
             if ( role.getRoleId() != 1 ) {
                 // 不为超级管理员查询所拥有的权限
                 // 根据角色id查询所关联的权限id
-                List<RoleMenu> roleMenus = roleMenuMapper.selectList(Wrappers.<RoleMenu>lambdaQuery().eq(RoleMenu::getRoleId, role.getRoleId()));
+                List<RoleMenu> roleMenus = roleMenuService.list(Wrappers.<RoleMenu>lambdaQuery().eq(RoleMenu::getRoleId, role.getRoleId()));
                 // 创建权限id集合
                 List<Integer> menus = new ArrayList<>();
                 // 将权限id添加到权限id集合中
@@ -73,25 +73,27 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
     }
 
     @Override
-    public Role getAuthorizationRole(String userId) {
+    public JsonResult getAuthorizationRole(String roleId, String path) {
 
-        // 根据用户id查询角色id
-        UserRole userRoles = userRoleMapper.selectOne(Wrappers.<UserRole>lambdaQuery().eq(UserRole::getUserId, userId));
+        // 查询角色
+        Role role = this.getById(roleId);
 
-        // 创建角色
-        Role role = null;
-
-        // 判断是否查询到角色id
-        if ( userRoles.getRoleId() != null ) {
-            // 查询角色
-            role = this.getById(userRoles.getRoleId());
-            if ( role != null ) {
-                role.setMenus(menuMapper.selectList(Wrappers.<Menu>lambdaQuery().in(Menu::getMenuId, roleMenuMapper.selectList(Wrappers.<RoleMenu>lambdaQuery().eq(RoleMenu::getRoleId, role.getRoleId())).stream().map(RoleMenu::getMenuId).toArray())));
+        // 判断角色是否存在
+        if ( role != null ) {
+            // 根据角色id查询所关联的权限id
+            List<RoleMenu> roleMenus = roleMenuService.list(Wrappers.<RoleMenu>lambdaQuery().eq(RoleMenu::getRoleId, role.getRoleId()));
+            // 创建权限id集合
+            List<Integer> menus = new ArrayList<>();
+            // 将权限id添加到权限id集合中
+            roleMenus.forEach(roleMenu -> menus.add(roleMenu.getMenuId()));
+            // 查询是否这个权限
+            Menu menu = menuMapper.selectOne(Wrappers.<Menu>lambdaQuery().in(Menu::getMenuId, menus).eq(Menu::getMenuPath, path));
+            if ( menu != null ) {
+                return JsonResult.ok("有权限操作");
             }
         }
 
-        // 返回角色
-        return role;
+        return JsonResult.error("无权限操作");
     }
 
     @Override
@@ -125,7 +127,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
             // 判断是否有添加权限
             if ( role.getMenus() != null && !role.getMenus().isEmpty()) {
                 // 添加权限
-                role.getMenus().forEach(menu -> roleMenuMapper.insert(new RoleMenu(role.getRoleId(), Math.toIntExact(menu.getMenuId()))));
+                role.getMenus().forEach(menu -> roleMenuService.save(new RoleMenu(role.getRoleId(), Math.toIntExact(menu.getMenuId()))));
             }
         } else {
             return JsonResult.error("添加角色失败");
@@ -145,10 +147,14 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
             // 判断是否有添加权限
             if ( role.getMenus() != null && !role.getMenus().isEmpty() ) {
                 // 删除角色权限
-                roleMenuMapper.delete(Wrappers.<RoleMenu>lambdaQuery().eq(RoleMenu::getRoleId, role.getRoleId()));
+                roleMenuService.remove(Wrappers.<RoleMenu>lambdaQuery().eq(RoleMenu::getRoleId, role.getRoleId()));
 
-                // 添加权限
-                role.getMenus().forEach(menu -> roleMenuMapper.insert(new RoleMenu(role.getRoleId(), Math.toIntExact(menu.getMenuId()))));
+                // 创建角色菜单集合
+                List<RoleMenu> roleMenus = new ArrayList<>();
+                // 遍历将角色权限添加到角色菜单集合中
+                role.getMenus().forEach(menu -> roleMenus.add(new RoleMenu(role.getRoleId(), Math.toIntExact(menu.getMenuId()))));
+                // 批量新增角色菜单数据
+                roleMenuService.saveBatch(roleMenus);
             }
         }else{
             return JsonResult.error("更新角色失败");
@@ -165,7 +171,9 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
 
         if (remove > 0) {
             // 删除角色权限
-            roleMenuMapper.deleteBatchIds(Arrays.asList(roleId));
+            roleMenuService.removeBatchByIds(Arrays.asList(roleId));
+            // 删除用户角色
+            userRoleMapper.delete(Wrappers.<UserRole>lambdaQuery().eq(UserRole::getRoleId, roleId));
         }else {
             return JsonResult.error("删除角色失败");
         }

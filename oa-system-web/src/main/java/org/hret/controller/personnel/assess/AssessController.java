@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.Value;
 import org.hret.entity.personnel.assess.Assess;
 import org.hret.pojo.JsonResult;
 import org.hret.service.personnel.assess.AssessService;
@@ -53,6 +54,11 @@ public class AssessController {
     @Operation(summary = "根据考核方法id查询考核方法",description = "根据考核方法id查询考核方法")
     public Assess findAssessMentById(@RequestParam(value = "assessId") Long assessId) {
         return assessService.findAeeseeMentById(assessId);
+    }
+    @RequestMapping(value = "findUserIdAndAssessId",method = RequestMethod.POST)
+    @Operation(summary = "根据考核方法id查询考核方法",description = "根据考核方法id查询考核方法")
+    public Assess findUserIdAndAssess(@RequestParam(value = "userId") Integer userId) {
+        return assessService.findUserIdAndAssess(userId);
     }
     @RequestMapping(value = "updateAssessMent",method = RequestMethod.POST)
     @Operation(summary = "修改考核方法",description = "修改考核方法")

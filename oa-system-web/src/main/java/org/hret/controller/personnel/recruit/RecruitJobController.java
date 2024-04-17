@@ -7,8 +7,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
 import org.hret.entity.personnel.recruit.RecruitJob;
 import org.hret.pojo.JsonResult;
+import org.hret.pojo.OssFileUtil;
 import org.hret.service.personnel.recruit.RecruitJobService;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -16,6 +18,7 @@ import java.util.List;
  * Authar:liujintao
  * Data:2024/3/18
  * jdk:17
+ * 描述:职位管理
  */
 @CrossOrigin
 @RestController
@@ -55,18 +58,18 @@ public class RecruitJobController {
     @Operation(summary = "添加职位", description = "添加职位")
     @RequestMapping(value = "addJob", method = RequestMethod.POST)
     public JsonResult addJob(@RequestBody RecruitJob recruitJob) {
-        try {
+//        try {
             return recruitJobService.addJob(recruitJob);
-        } catch (Exception e) {
-            return JsonResult.error("添加失败");
-        }
+//        } catch (Exception e) {
+//            return JsonResult.error("添加失败");
+//        }
     }
 
     @Operation(summary = "删除职位", description = "删除职位")
     @RequestMapping(value = "deleteJob", method = RequestMethod.POST)
-    public JsonResult deleteJob(@RequestBody RecruitJob recruitJob) {
+    public JsonResult deleteJob(@RequestParam(value = "JobId") Long JobId) {
         try {
-            return recruitJobService.deleteJob(recruitJob);
+            return recruitJobService.deleteJob(JobId);
         } catch (Exception e) {
             return JsonResult.error("删除失败");
         }
@@ -83,5 +86,17 @@ public class RecruitJobController {
     void exportData(HttpServletResponse response) {
         List<RecruitJob> all = recruitJobService.findAll();
         EasyPoiUtils.exportExcel(all, "日志导出", "日志导出", RecruitJob.class, "日志导出.xlsx", response);
+    }
+
+    @RequestMapping(value = "userImg")
+    @Operation(summary = "上传图片", description = "上传图片")
+    public JsonResult userImg(@RequestParam("file") MultipartFile file) {
+        try {
+            String s = OssFileUtil.uploadFile(file);
+            String imgUrl = OssFileUtil.getImgUrl(s);
+            return JsonResult.ok("200", imgUrl);
+        } catch (Exception e) {
+            return JsonResult.error("上传失败");
+        }
     }
 }

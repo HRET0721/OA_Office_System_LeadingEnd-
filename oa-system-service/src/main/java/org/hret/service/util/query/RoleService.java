@@ -14,10 +14,12 @@ import org.hret.pojo.JsonResult;
 public interface RoleService extends IService<Role> {
 
     /**
-     * 根据用户id查询角色以及权限信息
-     * @param userId 用户id
+     * 根据角色id查询权限信息
+     * @param roleId 用户id
+     * @param path 路径
+     * return 验证结果
      */
-    Role getAuthorizationRole(String userId);
+    JsonResult getAuthorizationRole(String roleId, String path);
 
     /**
      * 查询角色

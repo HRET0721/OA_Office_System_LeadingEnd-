@@ -24,6 +24,12 @@ public class RoleController {
 
     private final RoleService roleService;
 
+    @RequestMapping(value = "/getAuthorizationRole", method = RequestMethod.POST)
+    @Operation(summary = "查询角色权限", description = "查询角色权限")
+    public JsonResult getAuthorizationRole(@RequestParam(value = "roleId") String roleId, @RequestParam(value = "path") String path) {
+        return roleService.getAuthorizationRole(roleId, path);
+    }
+
     @RequestMapping(value = "/findByRoles")
     @Operation(summary = "查询角色信息", description = "查询角色信息")
     public PageInfo<Role> findByRoles(@RequestBody Role role) {
