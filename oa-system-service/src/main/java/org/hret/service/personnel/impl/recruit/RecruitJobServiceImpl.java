@@ -92,8 +92,8 @@ public class RecruitJobServiceImpl extends ServiceImpl<RecruitJobMapper, Recruit
     }
 
     @Override
-    public JsonResult deleteJob(RecruitJob recruitJob) {
-        boolean b = this.removeById(recruitJob);
+    public JsonResult deleteJob(Long JobId) {
+        boolean b = this.removeById(JobId);
         if (b){
             return JsonResult.ok("删除成功");
         }else {

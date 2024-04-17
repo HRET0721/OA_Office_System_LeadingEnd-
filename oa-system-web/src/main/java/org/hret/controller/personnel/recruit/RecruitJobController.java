@@ -1,6 +1,5 @@
 package org.hret.controller.personnel.recruit;
 
-import io.swagger.v3.core.util.Json;
 import lombok.RequiredArgsConstructor;
 import org.hret.pojo.EasyPoiUtils;
 import io.swagger.v3.oas.annotations.Operation;
@@ -67,9 +66,9 @@ public class RecruitJobController {
 
     @Operation(summary = "删除职位", description = "删除职位")
     @RequestMapping(value = "deleteJob", method = RequestMethod.POST)
-    public JsonResult deleteJob(@RequestBody RecruitJob recruitJob) {
+    public JsonResult deleteJob(@RequestParam(value = "JobId") Long JobId) {
         try {
-            return recruitJobService.deleteJob(recruitJob);
+            return recruitJobService.deleteJob(JobId);
         } catch (Exception e) {
             return JsonResult.error("删除失败");
         }

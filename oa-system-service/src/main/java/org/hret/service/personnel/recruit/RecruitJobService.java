@@ -21,7 +21,7 @@ public interface RecruitJobService extends IService<RecruitJob> {
 
     JsonResult addJob(RecruitJob recruitJob);
 
-    JsonResult deleteJob(RecruitJob recruitJob);
+    JsonResult deleteJob(Long JobId);
 
     List<RecruitJob> findAll();
 }
