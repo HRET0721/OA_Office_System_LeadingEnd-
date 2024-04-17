@@ -64,6 +64,10 @@ public class AssessScore extends Page implements Serializable {
      * 分数区间
      */
     private String fraction;
+ /**
+     *
+     */
+    private String createBy;
 
 
 

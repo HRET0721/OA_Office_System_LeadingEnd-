@@ -85,6 +85,8 @@ public class Assess extends Page implements Serializable{
     private List<RecruitJob> recruitJobs;
     @TableField(exist = false)
     private List<User> users;
+    @TableField(exist = false)
+    private Integer userIds;
 
 }
 

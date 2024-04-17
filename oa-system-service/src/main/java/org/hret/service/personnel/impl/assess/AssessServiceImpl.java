@@ -70,6 +70,36 @@ public class AssessServiceImpl extends ServiceImpl<AssessMapper, Assess> impleme
         list = getUserAndAssess(list);
         return new PageInfo<>(list);
     }
+
+    @Override 
+    public Assess findUserIdAndAssess(Integer userId) {
+//        for (Assess assess : usersId) {
+//            // ... （保留原有联查逻辑）
+//            Integer assessId = assess.getAssessId();
+//            // 用户和考核联查
+//            List<UserAssess> userAssesses = userAssessService.lambdaQuery().eq(UserAssess::getAssessId, assessId).list();
+//            for (UserAssess userAssess : userAssesses) {
+//                Integer userAssessId = userAssess.getUserId();
+//                User user = userService.lambdaQuery().eq(User::getUserId, userAssessId).one();
+//
+//                if (user != null) {  // 添加 null 检查，确保 User 不为 null
+//                    if (assess.getUsers() == null) {
+//                        assess.setUsers(new ArrayList<>());
+//                    }
+//                    assess.getUsers().add(user);
+//
+//                    // 新增逻辑：获取并存储 userId
+//                    Integer usersId = user.getUserId();
+//                    // 根据您的需求，可以选择将 userId 存储到 Assess 对象的某个属性，或者添加到一个集合中返回
+//                    // 示例：假设 Assess 类有一个 List<Integer> userIds 属性用于存储关联用户的 userId
+//                    assess.getUserIds().add(userId);
+//                }
+//            }
+//        }
+//
+        return null;
+    }
+
     public List<Assess> getUserAndAssess(List<Assess> list) {
 
         for (Assess assess : list) {
