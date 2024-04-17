@@ -1,6 +1,8 @@
 package org.hret.service.personnel.impl.assess;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.hret.entity.personnel.assess.AssessScore;
 import org.hret.mapper.personnel.assess.AssessScoreMapper;
@@ -12,7 +14,14 @@ import org.springframework.stereotype.Service;
 public class AssessScoreServiceImpl extends ServiceImpl<AssessScoreMapper, AssessScore> implements AssessScoreService {
     @Override
     public PageInfo<AssessScore> findAssessScoreListAndPage(AssessScore assessScore) {
-        return null;
+
+        PageHelper.startPage(assessScore.getPageNum(), assessScore.getPageSize());
+
+        QueryWrapper<AssessScore> queryWrapper = new QueryWrapper<>();
+        if ( assessScore.getScoreName() != null && !"".equals(assessScore.getScoreName()) ) {
+            queryWrapper.like("score_name", assessScore.getScoreName());
+        }
+        return new PageInfo<>(list(queryWrapper));
     }
 
     @Override

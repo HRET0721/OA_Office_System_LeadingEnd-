@@ -16,7 +16,6 @@
         <dependency>
             <groupId>org.hret</groupId>
             <artifactId>oa-system-common</artifactId>
-            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>io.swagger</groupId>
