@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -71,6 +72,9 @@ public class AssessTemplateServiceImpl extends ServiceImpl<AssessTemplateMapper,
     @Override
     @Transactional(rollbackFor = Exception.class)
     public JsonResult addAssessTemplate(AssessTemplate assessTemplate) {
+        assessTemplate.setScore("100");
+        assessTemplate.setRemark("1111");
+        assessTemplate.setCreateTime(new Date());
         int insert = this.baseMapper.insert(assessTemplate);
         if (insert > 0) {
             return JsonResult.ok("添加成功");

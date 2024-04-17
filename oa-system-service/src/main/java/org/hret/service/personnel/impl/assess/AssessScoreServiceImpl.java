@@ -26,6 +26,8 @@ public class AssessScoreServiceImpl extends ServiceImpl<AssessScoreMapper, Asses
 
     @Override
     public JsonResult addAssessScore(AssessScore assessScore) {
+        assessScore.setCreateBy("周杰伦");
+        assessScore.setStatus("0");
         int i = baseMapper.insert(assessScore);
         if (i > 0) {
             return JsonResult.ok("添加成功");

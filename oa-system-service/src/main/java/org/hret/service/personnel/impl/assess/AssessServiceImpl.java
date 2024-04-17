@@ -142,7 +142,8 @@ public class AssessServiceImpl extends ServiceImpl<AssessMapper, Assess> impleme
 
     @Override
     public JsonResult addAssessMent(Assess assess) {
-
+        assess.setHeadId(1);
+        assess.setStatus("1");
         int insert = this.baseMapper.insert(assess);
 
         if (insert > 0) {

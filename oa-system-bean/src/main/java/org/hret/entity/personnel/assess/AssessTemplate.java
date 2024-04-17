@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 考核模板表(AssessTemplate)实体类
@@ -70,7 +71,7 @@ public class AssessTemplate extends Page implements Serializable {
     /**
      * 评价权限
      */
-    private List commentPermissions;
+//    private String commentPermissions;
     /**
      * 邀请同事评价
      */
@@ -94,7 +95,7 @@ public class AssessTemplate extends Page implements Serializable {
     /**
      * 可执行人
      */
-    private List executor;
+//    private String executor;
     /**
      * 指派给指定人(0:手动调整;1自动跳过:;2:指派给指定人;)
      */
